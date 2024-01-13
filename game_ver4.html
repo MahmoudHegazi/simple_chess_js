@@ -17,6 +17,17 @@
 
 <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fclipground.com%2Fimages%2Fchess-rook-clipart-6.png&f=1&nofb=1&ipt=3e3d33f4675f2e741961179e67762d9f322fb984aa32b47edd2d54b72917ed13&ipo=images" height="50" id="blackRook">
 
+<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwebstockreview.net%2Fimages%2Fchess-clipart-svg-4.png&f=1&nofb=1&ipt=cecf360d4a6c1d60f0c8a2c9e6ad3f08f353a95d503dafa9f770f5d5b31c197e&ipo=images" height="50" id="blackElephant">
+
+<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.vexels.com%2Fmedia%2Fusers%2F3%2F254456%2Fisolated%2Fpreview%2Fd7a2f9afd47dbefcccd32dbae2f6a576-white-queen-chess-piece-color-stroke.png&f=1&nofb=1&ipt=923c5e3482b706fbde7069c254014ad78473f51cc779b4d7d7db68c8541839ef&ipo=images" height="50" id="whiteElephant">
+
+
+<img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.geocities.ws%2Fismael%2Fwhite_horse.png&f=1&nofb=1&ipt=a39aed5baf99e8e1b191382b64abdfc8832ec15b98f49f317b4847e574da40a5&ipo=images" height="50" id="whiteHourse">
+
+
+<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fclipartspub.com%2Fimages%2Fchess-pieces-clipart-knight-3.png&f=1&nofb=1&ipt=80568e167a9650e199226e49b48e749bae11b9db2f1c8b0e0fd33fcb3047bfe5&ipo=images" height="50" id="blackHourse">
+
+
 
 <div class="container-fluid">
   <div class="text-center" style="display:none;" id="main_error">
@@ -110,7 +121,7 @@ class Game {
             this.canvas = this.cJquery.get(0);
             this.context = this.canvas.getContext("2d");
             this.boardContext = this.canvas.getContext("2d");
-            this.maxImages = 4;
+            this.maxImages = 8;
             this.imagesReady = this.setupImages();
             this.row = 0;
             this.col = 0;
@@ -118,13 +129,22 @@ class Game {
             this.maxCol = 8;
             this.lineWidth = '4';
             this.strokeStyle = 'lightgreen';
-            this.sWidth = 50;
+            this.sWidth = 37;
             this.sHeight = 18;
             this.lastSquareColor = 'white';
             const blackSolder = this.images.blackSolder;
             const whiteSolder = this.images.whiteSolder;
             this.charactersIndexes = [
-                [{img: blackRook, cClass:Solider, r: 0, c: 0},null,null,null,null, {img: blackSolder, cClass:Solider, r: 7, c: 7}],
+                [
+                    {img: blackRook, cClass:Solider, r: 0, c: 0},
+                    {img: blackHourse, cClass:Solider, r: 0, c: 1},
+                    {img: blackElephant, cClass:Solider, r: 0, c: 2},
+                    null,
+                    null,
+                    {img: blackElephant, cClass:Solider, r: 0, c: 5},
+                    {img: blackHourse, cClass:Solider, r: 0, c: 6},
+                    {img: blackRook, cClass:Solider, r: 0, c: 7}
+                ],
                 [
                     {img: blackSolder, cClass:Solider, r: 1, c: 0},
                     {img: blackSolder, cClass:Solider, r: 1, c: 1},
@@ -149,7 +169,16 @@ class Game {
                     {img: whiteSolder, cClass:Solider, r: 7, c: 6},
                     {img: whiteSolder, cClass:Solider, r: 7, c: 7}
                 ],
-                [{img: whiteRook, cClass:Solider, r: 7, c: 0},null,null,null,null, {img: whiteRook, cClass:Solider, r: 7, c: 7}],
+                [{
+                    img: whiteRook, cClass:Solider, r: 7, c: 0},
+                    {img: whiteHourse, cClass:Solider, r: 7, c: 1},
+                    {img: whiteElephant, cClass:Solider, r: 7, c: 2},
+                    null,
+                    null,
+                    {img: whiteElephant, cClass:Solider, r: 7, c: 5},
+                    {img: whiteHourse, cClass:Solider, r: 7, c: 6},
+                    {img: whiteRook, cClass:Solider, r: 7, c: 7}
+                ],
             ];
             if (this.imagesReady) {
 
@@ -310,7 +339,7 @@ const game = (function(canvasId, main_error, imagesIds) {
         gameObject = new ClientError('unable to setup error', 'game.beforeConstruct', () => {}, error);
     }
     return gameObject;
-})("#demo", "#main_error", ["whiteSolder", "blackSolder", "whiteRook", "blackRook"]);
+})("#demo", "#main_error", ["whiteSolder", "blackSolder", "whiteRook", "blackRook", "blackElephant", "whiteElephant", "whiteHourse", "blackHourse"]);
 
 console.log(`is Game: ${game instanceof Game}`);
 console.log(`is ClientError: ${game instanceof ClientError}`);
