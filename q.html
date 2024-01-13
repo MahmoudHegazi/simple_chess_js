@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>fuckofffycjiff
+<body>
+
+ <img src="https://www.pikpng.com/pngl/b/421-4216644_chess-pawn-png-chess-pieces-pawn-png-clipart.png" height="50" id="whiteSolder">
+  <img src="https://www.pikpng.com/pngl/b/421-4216644_chess-pawn-png-chess-pieces-pawn-png-clipart.png" height="50" id="blackSolder">
+ 
+<div class="container-fluid">
+  <div class="text-center" style="display:none;" id="main_error">
+  </div>
+  <div class="mx-auto border border-secondary d-flex justify-content-center align-items-start" style="max-width:90%;overflow:auto;max-height:780px;min-height:880px;">
+      <canvas id="demo" style="border:1px solid #d3d3d3;width:98%;height:780px;">
+        Your browser does not support the HTML canvas tag.
+    </canvas>
+  </div>
+</div>
+
+<div>
+
+</div>
+
+
+<script>
+class GameError {
+    constructor(errorMsg = "Unknown error", error = null, errorCb = () => {}) {
+        this.message = errorMsg;
+        this.isError = true;
+        this.error = error;
+        this.errorCb = errorCb;
+    }
+    isValidErrorMsg() {
+        return this.message && typeof(this.message) === 'string';
+    }
+    isValidError() {
+        return this.error && typeof(this.error) === 'object' && this.error instanceof Error;
+    }
+
+}
+
+class ClientError extends GameError {
+    constructor(errorMsg, caller, CatchError = null, errorCb = () => {}) {
+        const privateErrorCb = (typeof(errorCb) === 'function') ? errorCb : () => {};
+        const privateCaller = (caller && typeof(caller) === 'string') ? caller : 'unknown method';
+
+        // call the super class constructor and pass in the name parameter
+        super(errorMsg, CatchError, privateErrorCb);
+
+        this.displayError();
+    }
+    displayError(errorCb) {
+
+        if (this.isValidErrorMsg()) {
+            alert(this.message);
+        }
+
+        if (this.isValidError()) {
+            console.log(`error from ${this.caller}`, this.error);
+        }
+
+        this.errorCb();
+        return true;
+    }
+}
+
+class Character {
+    constructor(img, sx, sy, sWidth, sHeight, ctx, game) {
+      this.img = img;
+      this.sWidth = sWidth;
+      this.sHeight = sHeight;
+      this.ctx = ctx;
+      this.game = game;
+      this.sx = sx;
+      this.sy = sy;
+      this.draw();
+    }
+    
+    draw(s) {
+    console.log("heres anta denomk 3yaz ttnak ya3ny fuckoff u know that edited by gay son of gay i hear sound of fucking spywareson of gay", (((this.sWidth/2)/2) + this.sx));
+    const FukkUYn3lDenOMK = (((this.sWidth/2)/2) + this.sx);
+    console.log(FukkUYn3lDenOMK);
+    //alert(FukkUYn3lDenOMK);
+      this.ctx.drawImage(this.img,FukkUYn3lDenOMK , 19.24155584524, (this.sWidth/2), (this.sHeight / 1.5) + 2);
+    }
+}
+
+class Solider extends Character {
+    constructor(img, sx, sy, sWidth, sHeight, ctx, game) {
+        super(img, sx, sy, sWidth, sHeight, ctx, game);
+    }
+}
+class Game {
+    constructor(cElm, errorElm, imagesIds) {
+
+        if (cElm && $(cElm).length && errorElm && $(errorElm).length && Array.isArray(imagesIds)) {
+            this.imagesIds = imagesIds;
+            this.images = {};
+            this.squares = {};
+            this.cJquery = $(cElm);
+            this.canvas = this.cJquery.get(0);
+            this.context = this.canvas.getContext("2d");
+            this.boardContext = this.canvas.getContext("2d");
+            this.maxImages = 2;
+            this.imagesReady = this.setupImages();
+            this.row = 0;
+            this.col = 0;
+            this.maxRow = 8;
+            this.maxCol = 8;
+            this.lineWidth = '4';
+            this.strokeStyle = 'lightgreen';
+            this.sWidth = 50;
+            this.sHeight = 18;
+            this.lastSquareColor = 'white';
+            const blackSolder = this.images.blackSolder;
+            this.charactersIndexes = [
+                [],
+                [
+                    {img: whiteSolder, cClass:Solider, r: 1, c: 0},
+                    {img: blackSolder, cClass:Solider, r: 1, c: 1},
+                    {img: blackSolder, cClass:Solider, r: 1, c: 2},
+                    {img: blackSolder, cClass:Solider, r: 1, c: 3},
+                    {img: blackSolder, cClass:Solider, r: 1, c: 4},
+                    {img: blackSolder, cClass:Solider, r: 1, c: 5},
+                    {img: blackSolder, cClass:Solider, r: 1, c: 6},
+                    {img: blackSolder, cClass:Solider, r: 1, c: 7}
+                ],
+            ];
+            if (this.imagesReady) {
+
+                //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+                //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+                //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+                //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+                //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+                //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+                //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+
+
+
+                //this.clearRect(0, 0, this.sWidth, this.sHeight);
+            } else {
+                return new ClientError("Error Canvas Missing or invalid images provided", 'Game.constructor', null, () => {});
+            }
+
+            console.log(this.setupSquares());
+
+
+
+
+        } else {
+            return new ClientError("Error Canvas not constructed successfully", 'Game.constructor', null, () => {});
+        }
+        //this.c = cElm;
+        console.log(this.cJquery.get(0), this.cWidth, this.cHeight, 'done');
+        //this.ctx = cElm.getContext("2d");
+    }
+
+
+    get cWidth() {
+        return this.cJquery.length ? this.cJquery.width() : -1;
+    }
+    get cHeight() {
+        return this.cJquery.length ? this.cJquery.height() : -1;
+    }
+
+    sx(reset = false) {
+        if (reset) {
+            this.col = 0;
+            return false;
+        }
+        const sx = this.sWidth * this.col;
+        this.col = (this.maxCol > this.col) ? this.col + 1 : 0;
+        return sx;
+    }
+    sy(reset) {
+        if (reset) {
+            this.row = 0;
+            return false;
+        }
+
+        const sy = this.sHeight * this.row;
+        this.row += (this.maxRow > this.row) ? 1 : 0;
+        return sy;
+    }
+
+    clearRect(xcoordinate_of_img1, ycoordinate_of_img1, img1_width, img1_height) {
+        return this.context.clearRect(xcoordinate_of_img1, ycoordinate_of_img1, xcoordinate_of_img1 + img1_width, ycoordinate_of_img1 + img1_height);
+
+    }
+    setupSquares() {
+        const rows = [];
+        for (let r = 0; r < this.maxRow; r++) {
+            const row = [];
+            const sy = this.sHeight * r;
+            for (let c = 0; c < this.maxCol; c++) {
+                const sx = this.sWidth * c;
+                const id = (c + 1) + (this.maxCol * (r));
+                const col = new Square(id, c, this.lastSquareColor, sx, sy, this.sWidth, this.sHeight, this.context, this);
+                let currentCharacter = null;
+                if (this.charactersIndexes.length > r && this.charactersIndexes[r].length > c && this.charactersIndexes[r][c]){
+                  const char = this.charactersIndexes[r][c];
+                  currentCharacter = new char.cClass(char.img, sx, sy, this.sWidth, this.sHeight, this.context, this);
+                  console.log(currentCharacter, currentCharacter.sWidth);
+                }
+                
+
+                this.lastSquareColor = (this.lastSquareColor == 'white') ? 'khaki' : 'white';
+                row.push(col);
+            }
+            rows.push(row);
+        }
+        return rows;
+    }
+    setupImages() {
+        for (let i = 0; i < this.imagesIds.length; i++) {
+            const imageId = this.imagesIds[i];
+            if (imageId && $(`#${imageId}`).length) {
+                this.images[imageId] = $(`#${imageId}`).get(0);
+                this.maxImages -= 1;
+            } else {
+                break
+            }
+        }
+        if (this.maxImages === 0) {
+            return true;
+        } else {
+            this.images = {};
+            return false;
+        }
+        return (this.maxImages === 0);
+    }
+
+}
+
+class Square {
+    constructor(id, i, color, sx, sy, sWidth, sHeight, ctx, game) {
+        this.id = id;
+        this.i = i;
+        this.color = color;
+        this.sx = sx;
+        this.sy = sy;
+        this.width = sWidth;
+        this.height = sHeight;
+        this.ctx = ctx;
+        this.color = color;
+        this.lineWidth = '4';
+        this.strokeStyle = 'lightgreen';
+        this.game = game;
+        this.draw(this.ctx);
+
+
+    }
+    draw(ctx = null, sx = null, sy = null, width = null, height = null) {
+        let currentCtx = ctx;
+        ctx.beginPath();
+        if (ctx && sx && sy && width && height) {
+            ctx.rect(sx, sy, width, height);
+            currentCtx = ctx;
+        } else {
+            this.ctx.rect(this.sx, this.sy, this.width, this.height);
+            currentCtx = this.ctx;
+        }
+
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.lineWidth = this.game.lineWidth;
+        ctx.strokeStyle = this.game.strokeStyle;
+        ctx.stroke();
+
+
+    }
+    click() {}
+}
+
+
+
+const game = (function(canvasId, main_error, imagesIds) {
+    let gameObject = null;
+    try {
+        if (canvasId && $(canvasId).length && Array.isArray(imagesIds)) {
+            gameObject = new Game(canvasId, main_error, imagesIds);
+        }
+    } catch (error) {
+        throw error;
+        gameObject = new ClientError('unable to setup error', 'game.beforeConstruct', () => {}, error);
+    }
+    return gameObject;
+})("#demo", "#main_error", ["whiteSolder", "blackSolder"]);
+console.log(`is Game: ${game instanceof Game}`);
+console.log(`is ClientError: ${game instanceof ClientError}`);
+console.log(`is GameError or instance of GameError: ${game instanceof GameError}`, game);
+</script>
+
+</body>
+</html>
