@@ -69,7 +69,6 @@ class ClientError extends GameError {
   }
 }
 
-
 class Game {    
     constructor(cElm, errorElm, imagesIds) {
 
@@ -87,6 +86,9 @@ class Game {
       this.col = 0;
       this.MaxRow = 8;
       this.maxCol = 8;
+      this.lineWidth = '4';
+      this.strokeStyle = 'lightgreen';
+      
       this.lastSquareColor = 'white';
       if (this.imagesReady) {
 
@@ -106,10 +108,10 @@ class Game {
           return new ClientError("Error Canvas Missing or invalid images provided", 'Game.constructor', null, ()=>{});
       }
 console.log(this.setupSquares());
-    alert(this.sWidth);
-    alert(this.sHeight);
+    //alert('swidth'+this.sWidth);
+    //alert('sheight'+this.sHeight);
       
-
+alert((this.cJquery[0].scrollWidth/this.maxCol)/2);
       //console.log(images);
       //const test = drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
@@ -130,11 +132,11 @@ console.log(this.setupSquares());
   }
   
   get sWidth(){
-     const x = Math.floor(this.cWidth/8-((this.cWidth/8)/4));
+     const x = Math.floor(this.cWidth/this.maxCol)-(this.maxCol/4.2);
      return (x >= 0) ? x : 0; 
   }
   get sHeight(){
-     const y = Math.floor(this.cHeight/8-((this.cHeight/8)/4));
+     const y = Math.floor(this.cHeight/8-((this.cHeight/8)/2));
      return (y >= 0) ? y : 0; 
   }
   sx(reset=false){
@@ -165,11 +167,12 @@ console.log(this.setupSquares());
     const rows = [];
     for (let r=0; r<this.MaxRow; r++){
       const row = [];
-      const sy = this.sWidth * r;
+      const sy = this.sHeight * r;
       for (let c=0; c<this.maxCol; c++) {
         const sx = this.sWidth * c;
-        const col = {id: c+1, i: c, color: this.lastSquareColor, sx: sx, sy: sy};
-        this.lastSquareColor = (this.lastSquareColor == 'white') ? 'black' : 'white';
+        const id = (c+1) + (this.maxCol*(r));
+        const col = new Square(id, c, this.lastSquareColor, sx, sy, this.sWidth, this.sHeight, this.context, this);
+        this.lastSquareColor = (this.lastSquareColor == 'white') ? 'khaki' : 'white';
         row.push(col);
       }
       rows.push(row);
@@ -196,6 +199,48 @@ console.log(this.setupSquares());
   }
   
 }
+
+class Square {
+   constructor(id, i, color, sx, sy, sWidth, sHeight, ctx , game) {
+     this.id = id;
+     this.i = i;
+     this.color = color;
+     this.sx = sx;
+     this.sy = sy;
+     this.width = sWidth;
+     this.height = sHeight;     
+     this.ctx = ctx;
+     this.color = color;
+     this.lineWidth = '4';
+     this.strokeStyle = 'lightgreen';
+     this.game = game;
+     this.draw(this.ctx);
+
+
+   }
+   draw(ctx=null, sx=null, sy=null, width=null, height=null) {
+     let currentCtx = ctx;
+     ctx.beginPath();
+     if (ctx && sx && sy && width && height){
+       ctx.rect(sx, sy, width, height);
+       currentCtx = ctx;
+     } else {
+       this.ctx.rect(this.sx, this.sy, this.width, this.height);
+       currentCtx = this.ctx;
+     }
+     
+     ctx.fillStyle = this.color;
+     ctx.fill();
+     ctx.lineWidth = this.game.lineWidth;
+     ctx.strokeStyle = this.game.strokeStyle;
+     ctx.stroke();     
+
+
+   }
+   click() {
+   }
+}
+
 
 
 const game = (function(canvasId, main_error, imagesIds){
