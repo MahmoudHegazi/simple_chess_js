@@ -13,7 +13,11 @@
 
  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpics.clipartpng.com%2Fmidle%2FPawn_White_Chess_Piece_PNG_Clip_Art-2751.png&f=1&nofb=1&ipt=686de2f1f2205ba0aa52a662ebd184b4b2e3f6de297c21add3740968d5b7bf2c&ipo=images" height="50" id="whiteSolder">
   <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftoppng.com%2Fuploads%2Fthumbnail%2Fpawn-black-chess-piece-11532856202krihsmphdp.png&f=1&nofb=1&ipt=2bc3cbcc0c47b93dfb58aea0dca3a5f187cdcd3711ad3cd4842e3211a66eae7a&ipo=images" height="50" id="blackSolder">
- 
+   <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpics.clipartpng.com%2FRook_White_Chess_Piece_PNG_Clip_Art-2754.png&f=1&nofb=1&ipt=40fbc49844b2df9922012b8e6c8a5b397b10a59530c1ece7bd5d835b355f8b6a&ipo=images" height="50" id="whiteRook">
+
+<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fclipground.com%2Fimages%2Fchess-rook-clipart-6.png&f=1&nofb=1&ipt=3e3d33f4675f2e741961179e67762d9f322fb984aa32b47edd2d54b72917ed13&ipo=images" height="50" id="blackRook">
+
+
 <div class="container-fluid">
   <div class="text-center" style="display:none;" id="main_error">
   </div>
@@ -84,11 +88,9 @@ class Character {
     }
     
     draw(s) {
-    console.log("heres anta denomk 3yaz ttnak ya3ny fuckoff u know that edited by gay son of gay i hear sound of fucking spywareson of gay", (((this.sWidth/2)/2) + this.sx));
-    const FukkUYn3lDenOMK = (((this.sWidth/2)/2) + this.sx);
-    console.log(FukkUYn3lDenOMK);
-    //alert(FukkUYn3lDenOMK);
-      this.ctx.drawImage(this.img,FukkUYn3lDenOMK , this.sy, (this.sWidth/2), (this.sHeight / 1.5) + 2);
+
+    const x = (((this.sWidth/2)/2) + this.sx);
+      this.ctx.drawImage(this.img,x , this.sy, (this.sWidth/2), (this.sHeight / 1.5) + 2);
     }
 }
 
@@ -108,7 +110,7 @@ class Game {
             this.canvas = this.cJquery.get(0);
             this.context = this.canvas.getContext("2d");
             this.boardContext = this.canvas.getContext("2d");
-            this.maxImages = 2;
+            this.maxImages = 4;
             this.imagesReady = this.setupImages();
             this.row = 0;
             this.col = 0;
@@ -120,8 +122,9 @@ class Game {
             this.sHeight = 18;
             this.lastSquareColor = 'white';
             const blackSolder = this.images.blackSolder;
+            const whiteSolder = this.images.whiteSolder;
             this.charactersIndexes = [
-                [],
+                [{img: blackRook, cClass:Solider, r: 0, c: 0},null,null,null,null, {img: blackSolder, cClass:Solider, r: 7, c: 7}],
                 [
                     {img: blackSolder, cClass:Solider, r: 1, c: 0},
                     {img: blackSolder, cClass:Solider, r: 1, c: 1},
@@ -146,7 +149,7 @@ class Game {
                     {img: whiteSolder, cClass:Solider, r: 7, c: 6},
                     {img: whiteSolder, cClass:Solider, r: 7, c: 7}
                 ],
-                [],
+                [{img: whiteRook, cClass:Solider, r: 7, c: 0},null,null,null,null, {img: whiteRook, cClass:Solider, r: 7, c: 7}],
             ];
             if (this.imagesReady) {
 
@@ -307,7 +310,7 @@ const game = (function(canvasId, main_error, imagesIds) {
         gameObject = new ClientError('unable to setup error', 'game.beforeConstruct', () => {}, error);
     }
     return gameObject;
-})("#demo", "#main_error", ["whiteSolder", "blackSolder"]);
+})("#demo", "#main_error", ["whiteSolder", "blackSolder", "whiteRook", "blackRook"]);
 
 console.log(`is Game: ${game instanceof Game}`);
 console.log(`is ClientError: ${game instanceof ClientError}`);
