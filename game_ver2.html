@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+ <img src="https://i.ibb.co/kM9rPhP/solder-woman.png" height="50" id="soldier">
+<div class="container-fluid">
+  <div class="text-center" style="display:none;" id="main_error">
+  </div>
+  <div class="mx-auto border border-secondary d-flex justify-content-center align-items-start" style="max-width:90%;overflow:auto;max-height:500px;min-height:500px;">
+      <canvas id="demo" style="border:1px solid #d3d3d3;width:98%;height:490px;">
+        Your browser does not support the HTML canvas tag.
+    </canvas>
+  </div>
+</div>
+
+<div>
+
+</div>
+
+
+<script>
+class GameError {
+  constructor(errorMsg="Unknown error", error=null, errorCb=()=>{}) {
+    this.message = errorMsg;
+    this.isError = true;
+    this.error = error;
+    this.errorCb = errorCb;
+  }
+  isValidErrorMsg(){
+    return this.message && typeof(this.message) === 'string';
+  }
+  isValidError(){
+    return this.error && typeof(this.error) === 'object' && this.error instanceof Error;
+  }
+  
+}
+
+class ClientError extends GameError {
+  constructor(errorMsg, caller, CatchError=null, errorCb=()=>{}) {
+    const privateErrorCb = (typeof(errorCb) === 'function') ? errorCb : ()=>{};
+    const privateCaller = (caller && typeof(caller) === 'string') ? caller : 'unknown method';
+
+    // call the super class constructor and pass in the name parameter
+    super(errorMsg, CatchError, privateErrorCb);
+    
+    this.displayError();
+  }
+  displayError(errorCb) {
+  
+    if (this.isValidErrorMsg()){
+       alert(this.message);
+    }
+    
+    if (this.isValidError()){
+       console.log(`error from ${this.caller}`, this.error);
+    }
+    
+    this.errorCb();
+    return true;
+  }
+}
+
+
+class Game {    
+    constructor(cElm, errorElm, imagesIds) {
+
+      if (cElm && $(cElm).length && errorElm && $(errorElm).length && Array.isArray(imagesIds)){
+      this.imagesIds = imagesIds;
+      this.images= {};
+      this.cJquery = $(cElm);
+      this.canvas = this.cJquery.get(0);
+      this.context = this.canvas.getContext("2d");
+      this.boardContext = this.canvas.getContext("2d");
+      this.maxImages = 1;
+      if (this.setupImages()) {
+
+          this.context.drawImage(this.images.soldier, 0, 0, 30,25);
+          this.context.drawImage(this.images.soldier, 30, 0, 30,25);
+          this.context.drawImage(this.images.soldier, 60, 0, 30,25);
+          this.context.drawImage(this.images.soldier, 120, 0, 30,25);
+          this.context.drawImage(this.images.soldier, 120, 0, 30,25);
+      } else {
+          return new ClientError("Error Canvas Missing or invalid images provided", 'Game.constructor', null, ()=>{});
+      }
+
+    alert(this.objX());
+      
+
+      //console.log(images);
+      //const test = drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+
+    } else {
+      return new ClientError("Error Canvas not constructed successfully", 'Game.constructor', null, ()=>{});
+    }
+    //this.c = cElm;
+    console.log(this.cJquery.get(0), this.cWidth, this.cHeight, 'done');
+    //this.ctx = cElm.getContext("2d");
+  }
+  
+  get cWidth(){
+    return this.cJquery.length ? this.cJquery.width() : -1;
+  }
+  get cHeight(){
+    return this.cJquery.length ? this.cJquery.height() : -1;
+  }
+  
+  objX(imageObj){
+     const x = Math.floor(this.cWidth);
+     return (x >= 0) ? x : 0; 
+  }
+  
+  setupImages(){
+     for (let i=0; i<this.imagesIds.length; i++){
+       const imageId = this.imagesIds[i];
+       if (imageId && $(`#${imageId}`).length){
+         this.images[imageId] = $(`#${imageId}`).get(0);
+         this.maxImages -= 1;
+       } else {
+         break
+       }
+     }
+     if (this.maxImages === 0){
+         return true;
+     } else {
+         this.images = {};
+         return false;
+     }
+     return (this.maxImages === 0);
+  }
+  
+}
+
+
+const game = (function(canvasId, main_error, imagesIds){
+   let gameObject = null;
+   try {
+     if (canvasId && $(canvasId).length && Array.isArray(imagesIds)){
+       gameObject = new Game(canvasId, main_error, imagesIds);
+     }
+   } catch (error) {
+      throw error;
+      gameObject = new ClientError('unable to setup error', 'game.beforeConstruct', ()=>{}, error);
+   }
+   return gameObject;
+})("#demo", "#main_error", ["soldier"]);
+console.log(`is Game: ${game instanceof Game}`);
+console.log(`is ClientError: ${game instanceof ClientError}`);
+console.log(`is GameError or instance of GameError: ${game instanceof GameError}`, game);
+</script>
+
+</body>
+</html>
