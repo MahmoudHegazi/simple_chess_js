@@ -11,8 +11,10 @@
 </head>
 <body>
 
- 
+ <img src="https://i.ibb.co/kM9rPhP/solder-woman.png" height="50" >
 <div class="container">
+  <div class="text-center" style="display:none;" id="main_error">
+  </div>
   <div class="mx-auto border border-secondary d-flex justify-content-center align-items-start" style="max-width:90%;overflow:auto;max-height:500px;min-height:500px;">
       <canvas id="demo" style="border:1px solid #d3d3d3;width:98%;height:490px;">
         Your browser does not support the HTML canvas tag.
@@ -20,40 +22,96 @@
   </div>
 </div>
 
+<div>
+
+</div>
+
 
 <script>
-class Error {
-  constructor(errorMsg="Unknown error") {
+class GameError {
+  constructor(errorMsg="Unknown error", error=null, errorCb=()=>{}) {
     this.message = errorMsg;
     this.isError = true;
+    this.error = error;
+    this.errorCb = errorCb;
+  }
+  isValidErrorMsg(){
+    return this.message && typeof(this.message) === 'string';
+  }
+  isValidError(){
+    return this.error && typeof(this.error) === 'object' && e instanceof Error;
+  }
+  
+}
+
+class ClientError extends GameError {
+  constructor(errorMsg, errorCb, caller='',CatchError=null) {
+    const privateErrorCb = (typeof(errorCb) === 'function') ? errorCb : ()=>{};
+    const privateCaller = (caller && typeof(caller) === 'string') ? caller : 'unknown method';
+
+    // call the super class constructor and pass in the name parameter
+    super(errorMsg, CatchError, privateErrorCb);
+    
+    this.displayError();
+  }
+  displayError(errorCb) {
+  
+    if (this.isValidErrorMsg()){
+       /*console.log(`<div class="alert alert-success alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Success!</strong> Indicates a successful or positive action.
+</div>`);*/
+
+       alert(this.message);
+    }
+    
+    if (this.isValidError()){
+       console.log(`error from ${this.caller}`, this.error);
+    }
+    
+    this.errorCb();
+    return true;
   }
 }
+
+
 class Game {
-  constructor(cElm) {
-    if (cElm.get(0)){
-      this.cJquery = cElm;
-      this.c = cElm.get(0);
+  static images = {
+      solderY: new Image('https://i.ibb.co/kM9rPhP/solder-woman.png')
+  };
+  constructor(cElm, errorElm) {
+    if (cElm && $(cElm).length && errorElm && $(errorElm).length){
+      this.cJquery = $(cElm);
+      this.canvas = this.cJquery.get(0);
+      this.context = this.canvas.getContext("2d");
+      this.boardContext = this.canvas.getContext("2d");
+      //this.context.drawImage(this.images.,0,0);
+      console.log(this.solderY);
+      //const test = drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+
     } else {
-      return new Error("Canvas Not Found");
+      return new ClientError("Canvas or error element Not Found", cElm, 1);
     }
-    alert("hi");
     //this.c = cElm;
-    console.log(cElm.get(0), 'done');
+    console.log(this.cJquery.get(0), this.cWidth, this.cHeight, 'done');
     //this.ctx = cElm.getContext("2d");
   }
   
   get cWidth(){
     return this.cJquery.length ? this.cJquery.width() : -1;
   }
+  get cHeight(){
+    return this.cJquery.length ? this.cJquery.height() : -1;
+  }
   
 }
 
-function setup(canvasId){
+function setup(canvasId, main_error){
    let gameObject = null;
    try {
-     if (1==1 || canvasId || $(canvasId).length){
+     if (canvasId || $(canvasId).length){
 
-       gameObject = new Game($(canvasId));
+       gameObject = new Game(canvasId, main_error);
      }
    } catch (error) {
       console.log("unable to setup error ", error);
@@ -61,8 +119,8 @@ function setup(canvasId){
    }
    return gameObject;
 }
-const game = setup("#demo");
-alert(game.cWidth);
+const game = new Game("#demo", "#main_error");
+console.log(game instanceof ClientError);
 //console.log(game instanceof Game);
 //alert($("#demo").width());
 </script>
