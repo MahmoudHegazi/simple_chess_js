@@ -15,8 +15,8 @@
 <div class="container-fluid">
   <div class="text-center" style="display:none;" id="main_error">
   </div>
-  <div class="mx-auto border border-secondary d-flex justify-content-center align-items-start" style="max-width:90%;overflow:auto;max-height:500px;min-height:500px;">
-      <canvas id="demo" style="border:1px solid #d3d3d3;width:98%;height:490px;">
+  <div class="mx-auto border border-secondary d-flex justify-content-center align-items-start" style="max-width:90%;overflow:auto;max-height:700px;min-height:700px;">
+      <canvas id="demo" style="border:1px solid #d3d3d3;width:98%;height:695px;">
         Your browser does not support the HTML canvas tag.
     </canvas>
   </div>
@@ -84,7 +84,7 @@ class Game {
       this.imagesReady = this.setupImages();
       this.row = 0;
       this.col = 0;
-      this.MaxRow = 8;
+      this.maxRow = 8;
       this.maxCol = 8;
       this.lineWidth = '4';
       this.strokeStyle = 'lightgreen';
@@ -108,10 +108,10 @@ class Game {
           return new ClientError("Error Canvas Missing or invalid images provided", 'Game.constructor', null, ()=>{});
       }
 console.log(this.setupSquares());
-    //alert('swidth'+this.sWidth);
-    //alert('sheight'+this.sHeight);
+    alert('swidth'+this.sWidth);
+   alert('sheight'+this.sHeight);
       
-alert((this.cJquery[0].scrollWidth/this.maxCol)/2);
+//alert((this.cJquery[0].scrollWidth/this.maxCol)/2);
       //console.log(images);
       //const test = drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
@@ -130,13 +130,14 @@ alert((this.cJquery[0].scrollWidth/this.maxCol)/2);
   get cHeight(){
     return this.cJquery.length ? this.cJquery.height() : -1;
   }
-  
+
   get sWidth(){
-     const x = Math.floor(this.cWidth/this.maxCol)-(this.maxCol/4.2);
+     const x = (this.cWidth/this.maxCol-(this.maxCol/0.9));
      return (x >= 0) ? x : 0; 
   }
   get sHeight(){
-     const y = Math.floor(this.cHeight/8-((this.cHeight/8)/2));
+  console.log(this.maxRow, 'here');
+     const y = this.cHeight/37;
      return (y >= 0) ? y : 0; 
   }
   sx(reset=false){
@@ -165,7 +166,7 @@ alert((this.cJquery[0].scrollWidth/this.maxCol)/2);
   }
   setupSquares() {
     const rows = [];
-    for (let r=0; r<this.MaxRow; r++){
+    for (let r=0; r<this.maxRow; r++){
       const row = [];
       const sy = this.sHeight * r;
       for (let c=0; c<this.maxCol; c++) {
