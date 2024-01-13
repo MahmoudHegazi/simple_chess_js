@@ -69,6 +69,12 @@ class ClientError extends GameError {
   }
 }
 
+class Character {
+  constructor(cElm, errorElm, imagesIds) {
+  
+  }
+}
+
 class Game {    
     constructor(cElm, errorElm, imagesIds) {
 
@@ -92,8 +98,7 @@ class Game {
       this.lastSquareColor = 'white';
       if (this.imagesReady) {
 
-          //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
-          //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+           //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
           //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
           //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
           //this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
@@ -107,13 +112,15 @@ class Game {
       } else {
           return new ClientError("Error Canvas Missing or invalid images provided", 'Game.constructor', null, ()=>{});
       }
+
 console.log(this.setupSquares());
-    alert('swidth'+this.sWidth);
-   alert('sheight'+this.sHeight);
+
+              this.context.drawImage(this.images.soldier, 0, 0, this.sWidth,this.sHeight);
+              
+              this.context.drawImage(this.images.soldier, 0, 0, this.sWidth,this.sHeight);
+              
+              this.context.drawImage(this.images.soldier, 0, 0, this.sWidth,this.sHeight);
       
-//alert((this.cJquery[0].scrollWidth/this.maxCol)/2);
-      //console.log(images);
-      //const test = drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
     } else {
       return new ClientError("Error Canvas not constructed successfully", 'Game.constructor', null, ()=>{});
@@ -132,7 +139,7 @@ console.log(this.setupSquares());
   }
 
   get sWidth(){
-     const x = (this.cWidth/this.maxCol-(this.maxCol/0.9));
+     const x = (this.cWidth/this.maxCol)-this.maxCol;
      return (x >= 0) ? x : 0; 
   }
   get sHeight(){
