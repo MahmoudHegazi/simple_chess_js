@@ -81,18 +81,28 @@ class Game {
       this.context = this.canvas.getContext("2d");
       this.boardContext = this.canvas.getContext("2d");
       this.maxImages = 1;
-      if (this.setupImages()) {
+      this.imagesReady = this.setupImages();
+      this.row = 0;
+      this.col = 0;
+      this.MaxRow = 8;
+      this.maxCol = 8;
+      if (this.imagesReady) {
 
-          this.context.drawImage(this.images.soldier, 0, 0, 30,25);
-          this.context.drawImage(this.images.soldier, 30, 0, 30,25);
-          this.context.drawImage(this.images.soldier, 60, 0, 30,25);
-          this.context.drawImage(this.images.soldier, 120, 0, 30,25);
-          this.context.drawImage(this.images.soldier, 120, 0, 30,25);
+          this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+          this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+          this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+          this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+          this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+          this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+          this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+          this.context.drawImage(this.images.soldier, this.sx(), 0, this.sWidth,this.sHeight);
+          
       } else {
           return new ClientError("Error Canvas Missing or invalid images provided", 'Game.constructor', null, ()=>{});
       }
 
-    alert(this.objX());
+    alert(this.sWidth);
+    alert(this.sHeight);
       
 
       //console.log(images);
@@ -113,9 +123,23 @@ class Game {
     return this.cJquery.length ? this.cJquery.height() : -1;
   }
   
-  objX(imageObj){
-     const x = Math.floor(this.cWidth);
+  get sWidth(){
+     const x = Math.floor(this.cWidth/8-((this.cWidth/8)/4));
      return (x >= 0) ? x : 0; 
+  }
+  get sHeight(){
+     const y = Math.floor(this.cHeight/8-((this.cHeight/8)/4));
+     return (y >= 0) ? y : 0; 
+  }
+  sx(){
+     const sx = this.sWidth * this.col;
+     this.col += (this.maxCol > this.col) ? 1 : -1;
+     return sx; 
+  }
+  sy(){
+     const sx = this.sHeight * this.col;
+     this.col += (this.maxCol > this.col) ? 1 : -1;
+     return sx; 
   }
   
   setupImages(){
