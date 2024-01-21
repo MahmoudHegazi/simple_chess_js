@@ -304,7 +304,7 @@ class Game {
             for (let c = 0; c < this.maxCol; c++) {
                 const sx = this.sWidth * c;
                 const id = (c + 1) + (this.maxCol * (r));
-                const col = new Square(id, c, this.lastSquareColor, sx, sy, this.sWidth, this.sHeight, this.context, this);
+                const col = new Square(id, r, c, this.lastSquareColor, sx, sy, this.sWidth, this.sHeight, this.context, this);
                 let currentCharacter = null;
                 if (this.charactersIndexes.length > r && this.charactersIndexes[r].length > c && this.charactersIndexes[r][c]){
                   const char = this.charactersIndexes[r][c];
@@ -368,7 +368,10 @@ class Game {
                                 breaker = true;
                                 break;
                             } else {
-                                //console.log(`invalid one X:${x} y:${y}, sX:${sX}, sY:${sY}, sW:${sW} , sH: ${sH}, fullW:${fullW}, fullH:${fullH}`); 
+                            if (i==7 && r==0){
+                            
+                                console.log(`invalid one X:${x} y:${y}, sX:${sX}, sY:${sY}, sW:${sW} , sH: ${sH}, fullW:${fullW}, fullH:${fullH}`); 
+                                }
                                 continue;
                             }
                         } else {
@@ -392,6 +395,7 @@ class Game {
         const rect = this.canvas.getBoundingClientRect();
         const x = clientX - rect.left;
         const y = clientY - rect.top;
+        console.log([x,y]);
         return [x,y];
     }
     onClickCanvas(e) {
@@ -412,9 +416,10 @@ class Game {
 }
 
 class Square {
-    constructor(id, i, color, sx, sy, sWidth, sHeight, ctx, game) {
+    constructor(id, r, i, color, sx, sy, sWidth, sHeight, ctx, game) {
         this.id = id;
         this.i = i;
+        this.r = r;
         this.color = color;
         this.sx = sx;
         this.sy = sy;
@@ -451,6 +456,7 @@ class Square {
 
 
     }
+    /* as this responsive desgin canvas must get dynamic x,y,h,w */
     getWidth() {
       let width = null;
       if (this.game && this.game.canvas) {
@@ -463,12 +469,35 @@ class Square {
     getHeight() {
       let height = null;
       if (this.game && this.game.canvas) {
-         height = this.game.canvas.getBoundingClientRect().height / 8+1;
+         height = this.game.canvas.getBoundingClientRect().height / 8;
       } else {
         console.log("invalid game object from Square.getHeight");
       }
       return height;
     }
+    getX() {
+      let x = null;
+      const squareWidth = this.getWidth();
+      
+      if (!isNaN(parseInt(squareWidth)) && !isNaN(parseInt(this.i))) {
+         x = squareWidth * this.i;
+      } else {
+        console.log("invalid square size data from Square.getX");
+      }
+      return x;
+    }
+    getY() {
+      let y = null;
+      const squareHeight = this.getHeight();
+      
+      if (!isNaN(parseInt(squareHeight)) && !isNaN(parseInt(this.r))) {
+         y = squareHeight * this.r;
+      } else {
+        console.log("invalid square size data from Square.getY");
+      }
+      return y;
+    }
+    
     click() {}
 }
 
