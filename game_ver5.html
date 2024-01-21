@@ -170,7 +170,7 @@ class Game {
             this.col = 0;
             this.maxRow = 8;
             this.maxCol = 8;
-            this.lineWidth = '4';
+            this.lineWidth = '1';
             this.strokeStyle = 'lightgreen';
             this.sWidth = 37;
             this.sHeight = 18;
@@ -299,6 +299,8 @@ class Game {
         for (let r = 0; r < this.maxRow; r++) {
             const row = [];
             const sy = this.sHeight * r;
+            this.lastSquareColor = (this.lastSquareColor == 'white') ? 'khaki' : 'white';
+            
             for (let c = 0; c < this.maxCol; c++) {
                 const sx = this.sWidth * c;
                 const id = (c + 1) + (this.maxCol * (r));
@@ -350,12 +352,13 @@ class Game {
                     for (let i = 0; i < currentRow.length; i++) {
                     
                         const currentSquare = currentRow[i];
-                        if (currentSquare && !isNaN(parseInt(currentSquare.sx)) && !isNaN(parseInt(currentSquare.sy)) && !isNaN(parseInt(currentSquare.height)) && !isNaN(parseInt(currentSquare.width))) {
+                        if (currentSquare && !isNaN(parseInt(currentSquare.sx)) && !isNaN(parseInt(currentSquare.sy)) && !isNaN(parseInt(currentSquare.getHeight())) && !isNaN(parseInt(currentSquare.getWidth()))) {
 
                             const sX = currentSquare.sx;
                             const sY = currentSquare.sy;
-                            const sH = currentSquare.height;
-                            const sW = currentSquare.width;
+                            const sH = currentSquare.getHeight();
+                            const sW = currentSquare.getWidth();
+                            
                             const fullW = sX + sW;
                             const fullH = sY + sH;
 
@@ -365,7 +368,7 @@ class Game {
                                 breaker = true;
                                 break;
                             } else {
-                                console.log(`invalid one X:${x} y:${y}, sX:${sX}, sY:${sY}, sW:${sW} , sH: ${sH}, fullW:${fullW}, fullH:${fullH}`); 
+                                //console.log(`invalid one X:${x} y:${y}, sX:${sX}, sY:${sY}, sW:${sW} , sH: ${sH}, fullW:${fullW}, fullH:${fullH}`); 
                                 continue;
                             }
                         } else {
@@ -436,14 +439,35 @@ class Square {
             this.ctx.rect(this.sx, this.sy, this.width, this.height);
             currentCtx = this.ctx;
         }
-
+        
+        
         ctx.fillStyle = this.color;
         ctx.fill();
+        /*
         ctx.lineWidth = this.game.lineWidth;
         ctx.strokeStyle = this.game.strokeStyle;
         ctx.stroke();
+        */
 
 
+    }
+    getWidth() {
+      let width = null;
+      if (this.game && this.game.canvas) {
+         width = this.game.canvas.getBoundingClientRect().width / 8;
+      } else {
+        console.log("invalid game object from Square.getWidth");
+      }
+      return width;
+    }
+    getHeight() {
+      let height = null;
+      if (this.game && this.game.canvas) {
+         height = this.game.canvas.getBoundingClientRect().height / 8+1;
+      } else {
+        console.log("invalid game object from Square.getHeight");
+      }
+      return height;
     }
     click() {}
 }
