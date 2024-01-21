@@ -8,7 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>fuckofffycjiff
+</head>
 <body style="background:black;">
 
  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpics.clipartpng.com%2Fmidle%2FPawn_White_Chess_Piece_PNG_Clip_Art-2751.png&f=1&nofb=1&ipt=686de2f1f2205ba0aa52a662ebd184b4b2e3f6de297c21add3740968d5b7bf2c&ipo=images" height="50" id="whiteSolder">
@@ -122,6 +122,37 @@ class Solider extends Character {
         super(img, sx, sy, sWidth, sHeight, ctx, game);
     }
 }
+
+class King extends Character {
+    constructor(img, sx, sy, sWidth, sHeight, ctx, game) {
+        super(img, sx, sy, sWidth, sHeight, ctx, game);
+    }
+}
+
+class Queen extends Character {
+    constructor(img, sx, sy, sWidth, sHeight, ctx, game) {
+        super(img, sx, sy, sWidth, sHeight, ctx, game);
+    }
+}
+
+class Hourse extends Character {
+    constructor(img, sx, sy, sWidth, sHeight, ctx, game) {
+        super(img, sx, sy, sWidth, sHeight, ctx, game);
+    }
+}
+
+class Alfil extends Character {
+    constructor(img, sx, sy, sWidth, sHeight, ctx, game) {
+        super(img, sx, sy, sWidth, sHeight, ctx, game);
+    }
+}
+
+class Rook extends Character {
+    constructor(img, sx, sy, sWidth, sHeight, ctx, game) {
+        super(img, sx, sy, sWidth, sHeight, ctx, game);
+    }
+}
+
 class Game {
     constructor(cElm, errorElm, imagesIds) {
 
@@ -160,14 +191,14 @@ class Game {
             
             this.charactersIndexes = [
                 [
-                    {img: blackRook, cClass:Solider, r: 0, c: 0},
-                    {img: blackHourse, cClass:Solider, r: 0, c: 1},
-                    {img: blackElephant, cClass:Solider, r: 0, c: 2},
-                    {img: blackQueen, cClass:Solider, r: 7, c: 4},
-                    {img: blackKing, cClass:Solider, r: 0, c: 4},
-                    {img: blackElephant, cClass:Solider, r: 0, c: 5},
-                    {img: blackHourse, cClass:Solider, r: 0, c: 6},
-                    {img: blackRook, cClass:Solider, r: 0, c: 7}
+                    {img: blackRook, cClass:Rook, r: 0, c: 0},
+                    {img: blackHourse, cClass:Hourse, r: 0, c: 1},
+                    {img: blackElephant, cClass:Alfil, r: 0, c: 2},
+                    {img: blackQueen, cClass:Queen, r: 7, c: 4},
+                    {img: blackKing, cClass:King, r: 0, c: 4},
+                    {img: blackElephant, cClass:Alfil, r: 0, c: 5},
+                    {img: blackHourse, cClass:Hourse, r: 0, c: 6},
+                    {img: blackRook, cClass:Rook, r: 0, c: 7}
                 ],
                 [
                     {img: blackSolder, cClass:Solider, r: 1, c: 0},
@@ -194,14 +225,14 @@ class Game {
                     {img: whiteSolder, cClass:Solider, r: 7, c: 7}
                 ],
                 [{
-                    img: whiteRook, cClass:Solider, r: 7, c: 0},
-                    {img: whiteHourse, cClass:Solider, r: 7, c: 1},
-                    {img: whiteElephant, cClass:Solider, r: 7, c: 2},
-                    {img: whiteKing, cClass:Solider, r: 7, c: 4},
-                    {img: whiteKing, cClass:Solider, r: 7, c: 4},
-                    {img: whiteElephant, cClass:Solider, r: 7, c: 5},
-                    {img: whiteHourse, cClass:Solider, r: 7, c: 6},
-                    {img: whiteRook, cClass:Solider, r: 7, c: 7}
+                    img: whiteRook, cClass:Rook, r: 7, c: 0},
+                    {img: whiteHourse, cClass:Hourse, r: 7, c: 1},
+                    {img: whiteElephant, cClass:Alfil, r: 7, c: 2},
+                    {img: whiteQueen, cClass:Queen, r: 7, c: 4},
+                    {img: whiteKing, cClass:King, r: 7, c: 4},
+                    {img: whiteElephant, cClass:Alfil, r: 7, c: 5},
+                    {img: whiteHourse, cClass:Hourse, r: 7, c: 6},
+                    {img: whiteRook, cClass:Rook, r: 7, c: 7}
                 ],
             ];
             if (this.imagesReady) {
