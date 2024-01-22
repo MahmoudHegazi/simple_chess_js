@@ -49,27 +49,21 @@
 <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpics.clipartpng.com%2FQueen_White_Chess_Piece_PNG_Clip_Art-2757.png&f=1&nofb=1&ipt=15df4d77bddbe7d5c8f7eacf4b55df5c10b859780b4acb9e369f7fc49f87a09c&ipo=images" height="50" id="whiteKing" />
 
 
-
 <div class="container-fluid">
-   <div id="final_message" style="position: absolute;top: 0;left: 0;z-index: 100;width:100%;" class="d-flex jusitfy-content-center must_hide">
+    <div id="final_message" style="position: absolute;top: 0;left: 0;z-index: 100;width:100%;" class="d-flex jusitfy-content-center must_hide">
         <img id="win_image" src="https://media1.giphy.com/media/jsGz81YPCgw9YSliV0/giphy.gif" style="width:100%;" class="must_hide">
     </div>
-        
     <div class="text-center" style="display:none;" id="main_error">
     </div>
     <div class="p-3 bg-dark mx-auto rounded d-flex justify-content-center align-items-center text-center" style="overflow:auto;background: chocolate;border: 4px solid chocolate;">
         <h1 class="font-effect-fire-animation" style="letter-spacing: 0.120rem;font-family: cursive;padding-top:7px;">multipleChess.com</h1>
     </div>
-    
     <div class="p-3 bg-dark mx-auto rounded d-flex justify-content-center align-items-start" style="max-width:90%;overflow:auto;max-height:780px;min-height:880px;border: 4px solid chocolate;">
-        
-        
-        <canvas class="rounded" id="demo" style="border:1px solid #d3d3d3;width:100%;height:600px;max-width:650px;box-shadow: 0px 4px 10px 0 rgb(255 255 255 / 0.20%), 0px 6px 6px 0 rgb(241 216 64 / 58%);">
+        <canvas class="rounded" id="demo" style="border:1px solid #d3d3d3;width:100%;height:600px;max-width:700px;box-shadow: 0px 4px 10px 0 rgb(255 255 255 / 0.20%), 0px 6px 6px 0 rgb(241 216 64 / 58%);">
             Your browser does not support the HTML canvas tag.
         </canvas>
         <div id="game_hiddens" class="container p-3 must_hide">
             <div id="client_error" class="must_hide">
-                
             </div>
             <div id="screenConts" class="must_hide container-fluid w-100 p-0 border-rounded d-flex justify-content-center align-items-start" style="box-shadow: 6px 4px 10px 0 rgb(217 160 74), 4px 6px 20px 0 rgb(227 229 220 / 94%);max-width: 610px;display:none;">
                 <img src="https://media0.giphy.com/media/wKdJy5gnLDb7ILmBu9/giphy.gif?cid=790b7611c7vhznfx69mvdleyy5ia10nvwtu43h7twlv6oh2y&ep=v1_gifs_search&rid=giphy.gif&ct=g" style="width:100%;object-fit:contain;max-width: 600px;" style="width:100%;display:none;"  id="black_hourse_move" />
@@ -79,6 +73,7 @@
 </div>
 <div>
 </div>
+
 
 <script>
 // gameMessage
@@ -161,7 +156,7 @@ class GameError {
         }
     }
     throw() {
-      throw 'error is opp html what can done more than that core js and client my code async, Note all js Errors are returned as newClient Error class instance but not all newClient Error is core Error, learn oop responsive canvas';
+      throw 'Never Printed Error';
     }
 
 }
@@ -175,7 +170,6 @@ class ClientError extends GameError {
         super(errorMsg, caller, CatchError, privateErrorCb, bsStatus, bsStrong, game);
 
         this.displayError();
-        this.throw();
     }
     getErrorTemplate() {
         // this simple AI for handle all unknown will coming errors no mater const in nasa c++ error messages return by js I will detect it and display message user player can understand OOP why is rocket code realy not joke
@@ -232,7 +226,7 @@ class Character {
 }
 
 const Piece = (color, img, sx, sy, sWidth, sHeight, ctx, game, piece) => {
-    return (color === 'white') ? new Black(img, sx, sy, sWidth, sHeight, ctx, game) : new White(img, sx, sy, sWidth, sHeight, ctx, game, piece);
+    return (color === 'white') ? new White(img, sx, sy, sWidth, sHeight, ctx, game) : new Black(img, sx, sy, sWidth, sHeight, ctx, game, piece);
 };
 
 
@@ -789,8 +783,9 @@ class Game {
 
                     currentCharacter = new char.Class(char.img, sx, sy, this.sWidth, this.sHeight, this.context, this);
 
+//currentCharacter.color
 
-                    const newPiece = Piece(char.color, char.img, sx, sy, this.sWidth, this.sHeight, this.context, this, currentCharacter);
+                    const newPiece = Piece(currentCharacter.color, char.img, sx, sy, this.sWidth, this.sHeight, this.context, this, currentCharacter);
                     //relaition of square if it hold item dynamic
                     col.holder = newPiece;
                     //piece
