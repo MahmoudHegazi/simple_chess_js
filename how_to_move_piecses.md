@@ -75,7 +75,9 @@ frowrad he need minus row, as, (this for soliders only)
     `\/`3------>? ? (i+1, r-1)>/  i-1, r-1 <\  ,,,,  (i+1, r+1)>\ (i-1, r+1) </  (diagonally one) **التحرك السموكسي** <br />
     `/\`
 
-
+    - **Software diagrams and core js works for advanced info and more detials how it works**
+        - 1. Digrams:
+            - ![image](https://github.com/MahmoudHegazi/simple_chess_js/assets/55125302/06a558d5-95af-462c-bd80-1b01909b10a1)
 
 
 -----------------------------------
