@@ -1,0 +1,81 @@
+# Chess JS rules and (core moves)
+
+#### MAP (JS pandas part like 2DArray for move) (this make all pues movement lows using direct 2d array and just i and r to get target sqaure and assign it holder if accepted
+```javascriptarr
+this.charactersIndexes = [
+                    [
+                     { img: blackRook, Class: Rook, r: 0, c: 0, color: 'black' },
+                     { img: blackHourse, Class: Hourse, r: 0, c: 1, color: 'black' },
+                     { img: blackElephant, Class: Alfil, r: 0, c: 2, color: 'black' },
+                     { img: blackQueen, Class: Queen, r: 0, c: 3, color: 'black' },
+                     { img: blackKing, Class: King, r: 0, c: 4, color: 'black' },
+                     { img: blackElephant, Class: Alfil, r: 0, c: 5, color: 'black' },
+                     { img: blackHourse, Class: Hourse, r: 0, c: 6, color: 'black' },
+                     { img: blackRook, Class: Rook, r: 0, c: 7, color: 'black' }
+                    ],
+
+                    [
+                      { img: blackSolder, Class: Solider, r: 1, c: 0, color: 'black' },
+                      { img: blackSolder, Class: Solider, r: 1, c: 1, color: 'black' },
+                      { img: blackSolder, Class: Solider, r: 1, c: 2, color: 'black' },
+                      { img: blackSolder, Class: Solider, r: 1, c: 3, color: 'black' },
+                      { img: blackSolder, Class: Solider, r: 1, c: 4, color: 'black' },
+                      { img: blackSolder, Class: Solider, r: 1, c: 5, color: 'black' },
+                      { img: blackSolder, Class: Solider, r: 1, c: 6, color: 'black' },
+                      { img: blackSolder, Class: Solider, r: 1, c: 7, color: 'black' }
+                    ],
+
+                    [],
+                    [],
+                    [],
+                    [],
+                    [
+                      { img: whiteSolder, Class: Solider, r: 6, c: 0, color: 'white' },
+                      { img: whiteSolder, Class: Solider, r: 6, c: 1, color: 'white' },
+                      { img: whiteSolder, Class: Solider, r: 6, c: 2, color: 'white' },
+                      { img: whiteSolder, Class: Solider, r: 6, c: 3, color: 'white' },
+                      { img: whiteSolder, Class: Solider, r: 6, c: 4, color: 'white' },
+                      { img: whiteSolder, Class: Solider, r: 6, c: 5, color: 'white' },
+                      { img: whiteSolder, Class: Solider, r: 6, c: 6, color: 'white' },
+                      { img: whiteSolder, Class: Solider, r: 6, c: 7, color: 'white' }
+                    ],
+
+                    [
+                      { img: whiteRook, Class: Rook, r: 7, c: 0, color: 'white' },
+                      { img: whiteHourse, Class: Hourse, r: 7, c: 1, color: 'white' },
+                      { img: whiteElephant, Class: Alfil, r: 7, c: 2, color: 'white' },
+                      { img: whiteQueen, Class: Queen, r: 7, c: 3, color: 'white' },
+                      { img: whiteKing, Class: King, r: 7, c: 4, color: 'white' },
+                      { img: whiteElephant, Class: Alfil, r: 7, c: 5, color: 'white' },
+                      { img: whiteHourse, Class: Hourse, r: 7, c: 6, color: 'white' },
+                      { img: whiteRook, Class: Rook, r: 7, c: 7, color: 'white' }
+                    ],
+                ];
+
+```
+
+ALl need first get square it exist on., as it OOP game, will be move method on character parent class, all inhirts can get, but if was tell if this class of king give this only this method will see instance likes
+
+1. Important rule based on white or black it change direction for + on rows and minus, ex, white to move
+frowrad he need minus row, as, (this for soliders only)
+
+3. if last or first row, block movments can done sperate.
+(note math used to final get I and r of target so getSqueras by Index and thats it
+
+
+1. **The Rook**:
+    - to move vertical from squares array get all cols same [i] except square it exist on it. (I call it verticalLine all)
+    - to move horizontal from squares array get all cols from same row except col it within.  (I call it horizontal all)
+
+2. The king (allow used methods[ verticalLineOne(this), horizontalOne(this), diagonallyOne(this)  ])
+    - Note:first point u can get prev and after i of current pos, ex it in 1, so 0 and 2,
+    - look below <br />
+    `<1>`- First (i+1,same r) (i-1,same r) if any horizontal <>  (I call it verticalLine one) <br />
+    `|2|`- second (r+1,same i) (r-1,same i) if any vertical |   (I call it horizontal one) <br />
+    `\/`3------>? ? (i+1, r-1)>/  i-1, r-1 <\  ,,,,  (i+1, r+1)>\ (i-1, r+1) </  (diagonally one) **التحرك السموكسي** <br />
+    `/\`
+
+
+
+
+-----------------------------------
