@@ -6,25 +6,25 @@
 ```javascriptarr
 this.charactersIndexes = [
                     [
-                     { img: blackRook, Class: Rook, r: 0, c: 0, color: 'black' },
-                     { img: blackHourse, Class: Hourse, r: 0, c: 1, color: 'black' },
-                     { img: blackElephant, Class: Alfil, r: 0, c: 2, color: 'black' },
-                     { img: blackQueen, Class: Queen, r: 0, c: 3, color: 'black' },
-                     { img: blackKing, Class: King, r: 0, c: 4, color: 'black' },
-                     { img: blackElephant, Class: Alfil, r: 0, c: 5, color: 'black' },
-                     { img: blackHourse, Class: Hourse, r: 0, c: 6, color: 'black' },
-                     { img: blackRook, Class: Rook, r: 0, c: 7, color: 'black' }
+                     { img: blackRook,       Class: Rook,     r: 0, c: 0, color: 'black' },
+                     { img: blackHourse,     Class: Hourse,   r: 0, c: 1, color: 'black' },
+                     { img: blackElephant,   Class: Alfil,    r: 0, c: 2, color: 'black' },
+                     { img: blackQueen,      Class: Queen,    r: 0, c: 3, color: 'black' },
+                     { img: blackKing,       Class: King,     r: 0, c: 4, color: 'black' },
+                     { img: blackElephant,   Class: Alfil,    r: 0, c: 5, color: 'black' },
+                     { img: blackHourse,     Class: Hourse,   r: 0, c: 6, color: 'black' },
+                     { img: blackRook,       Class: Rook,     r: 0, c: 7, color: 'black' }
                     ],
 
                     [
-                      { img: blackSolder, Class: Solider, r: 1, c: 0, color: 'black' },
-                      { img: blackSolder, Class: Solider, r: 1, c: 1, color: 'black' },
-                      { img: blackSolder, Class: Solider, r: 1, c: 2, color: 'black' },
-                      { img: blackSolder, Class: Solider, r: 1, c: 3, color: 'black' },
-                      { img: blackSolder, Class: Solider, r: 1, c: 4, color: 'black' },
-                      { img: blackSolder, Class: Solider, r: 1, c: 5, color: 'black' },
-                      { img: blackSolder, Class: Solider, r: 1, c: 6, color: 'black' },
-                      { img: blackSolder, Class: Solider, r: 1, c: 7, color: 'black' }
+                      { img: blackSolder, Class: Solider,     r: 1, c: 0, color: 'black' },
+                      { img: blackSolder, Class: Solider,     r: 1, c: 1, color: 'black' },
+                      { img: blackSolder, Class: Solider,     r: 1, c: 2, color: 'black' },
+                      { img: blackSolder, Class: Solider,     r: 1, c: 3, color: 'black' },
+                      { img: blackSolder, Class: Solider,     r: 1, c: 4, color: 'black' },
+                      { img: blackSolder, Class: Solider,     r: 1, c: 5, color: 'black' },
+                      { img: blackSolder, Class: Solider,     r: 1, c: 6, color: 'black' },
+                      { img: blackSolder, Class: Solider,     r: 1, c: 7, color: 'black' }
                     ],
 
                     [],
@@ -32,25 +32,25 @@ this.charactersIndexes = [
                     [],
                     [],
                     [
-                      { img: whiteSolder, Class: Solider, r: 6, c: 0, color: 'white' },
-                      { img: whiteSolder, Class: Solider, r: 6, c: 1, color: 'white' },
-                      { img: whiteSolder, Class: Solider, r: 6, c: 2, color: 'white' },
-                      { img: whiteSolder, Class: Solider, r: 6, c: 3, color: 'white' },
-                      { img: whiteSolder, Class: Solider, r: 6, c: 4, color: 'white' },
-                      { img: whiteSolder, Class: Solider, r: 6, c: 5, color: 'white' },
-                      { img: whiteSolder, Class: Solider, r: 6, c: 6, color: 'white' },
-                      { img: whiteSolder, Class: Solider, r: 6, c: 7, color: 'white' }
+                      { img: whiteSolder, Class: Solider,     r: 6, c: 0, color: 'white' },
+                      { img: whiteSolder, Class: Solider,     r: 6, c: 1, color: 'white' },
+                      { img: whiteSolder, Class: Solider,     r: 6, c: 2, color: 'white' },
+                      { img: whiteSolder, Class: Solider,     r: 6, c: 3, color: 'white' },
+                      { img: whiteSolder, Class: Solider,     r: 6, c: 4, color: 'white' },
+                      { img: whiteSolder, Class: Solider,     r: 6, c: 5, color: 'white' },
+                      { img: whiteSolder, Class: Solider,     r: 6, c: 6, color: 'white' },
+                      { img: whiteSolder, Class: Solider,     r: 6, c: 7, color: 'white' }
                     ],
 
                     [
-                      { img: whiteRook, Class: Rook, r: 7, c: 0, color: 'white' },
-                      { img: whiteHourse, Class: Hourse, r: 7, c: 1, color: 'white' },
-                      { img: whiteElephant, Class: Alfil, r: 7, c: 2, color: 'white' },
-                      { img: whiteQueen, Class: Queen, r: 7, c: 3, color: 'white' },
-                      { img: whiteKing, Class: King, r: 7, c: 4, color: 'white' },
-                      { img: whiteElephant, Class: Alfil, r: 7, c: 5, color: 'white' },
-                      { img: whiteHourse, Class: Hourse, r: 7, c: 6, color: 'white' },
-                      { img: whiteRook, Class: Rook, r: 7, c: 7, color: 'white' }
+                      { img: whiteRook,        Class: Rook,   r: 7, c: 0, color: 'white' },
+                      { img: whiteHourse,      Class: Hourse, r: 7, c: 1, color: 'white' },
+                      { img: whiteElephant,    Class: Alfil,  r: 7, c: 2, color: 'white' },
+                      { img: whiteQueen,       Class: Queen,  r: 7, c: 3, color: 'white' },
+                      { img: whiteKing,        Class: King,   r: 7, c: 4, color: 'white' },
+                      { img: whiteElephant,    Class: Alfil,  r: 7, c: 5, color: 'white' },
+                      { img: whiteHourse,      Class: Hourse, r: 7, c: 6, color: 'white' },
+                      { img: whiteRook,        Class: Rook,   r: 7, c: 7, color: 'white' }
                     ],
                 ];
 
