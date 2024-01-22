@@ -41,7 +41,9 @@ as seen node.js manage game js client side and socket , flask API is main websit
 ## Software diagrams and core js works for advanced info and more detials how it works
 1. King first Move:
     - ![image](https://github.com/MahmoudHegazi/simple_chess_js/assets/55125302/06a558d5-95af-462c-bd80-1b01909b10a1)
-    - ![image](https://github.com/MahmoudHegazi/simple_chess_js/assets/55125302/a22b6e19-cb21-457d-89d4-02f513b8463f)
+    - ![image](https://github.com/MahmoudHegazi/simple_chess_js/assets/55125302/1e882042-dbd6-4a04-a873-eee65bb7e663) // lol create newClientError only do all that and handle html 
+    - ![image](https://github.com/MahmoudHegazi/simple_chess_js/assets/55125302/39544c6c-10f5-471e-bea5-3f2072ebd028)
+
 
 
 
