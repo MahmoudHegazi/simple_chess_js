@@ -98,11 +98,18 @@ require isready real function, count holders on it and chars and validate object
 OOP time, and sqlalchemy follow relationship nested , now we had squares with getAllGreen next get the square holders if any and if enemy class ! instanceof this so this 1 red posible kill and oop again will tell me what peaice, is hourse is queen is king and math time each peaee have weight so if king lol in getAllAttacksPossible in second move do it with same methods used by deep blue 1990 i did not used something not supported or react even or fancy lib 
 
 
-## top methods AI without AI for bot my job
-1. ```getAllGreenForAllPeaces(forAfter='3plays_loop')```
+## top methods AI without AI for bot my job 
+
+(forAfter='3plays_loop') done by other methods in other botClass AdvancedBot inhirted from Bot OOP full game not joke even flask will be full oop with classes file may even make with springboot to bet fancy oop must @?
+
+
+1. ```getAllGreenForAllPeaces()```
       -  which all allowed movments of all my peaces
-2. ```getAllAttacksPossible(forAfter='3plays_loop')```
-      - OOP time, and sqlalchemy follow relationship nested , now we had squares with getAllGreen next get the square holders if any and if enemy class ! instanceof this so this 1 red posible kill and oop again will tell me what peaice, is hourse is queen is king and math time each peaee have weight so if king lol in getAllAttacksPossible in second move do it with same methods used by deep blue 1990 i did not used something not supported or react even or fancy lib 
+2. ```getAllAttacksPossible()```
+      - OOP time, and sqlalchemy follow relationship nested , now we had squares with getAllGreen next get the square holders if any and if enemy class ! instanceof this so this 1 red posible kill and oop again will tell me what peaice, is hourse is queen is king and math time each peaee have weight so if king lol in getAllAttacksPossible in second move do it with same methods used by deep blue 1990 i did not used something not supported or react even or fancy lib
+  
+##### lvl of bot based on forAfter, ex beginer after 0 play from current play,
+which i will start with also means no after get direct green now and direct attack now.
 
 #### note about bot mode of this game
 human never calc all posible w8 when *2 the after move and *3
