@@ -89,3 +89,16 @@ frowrad he need minus row, as, (this for soliders only)
 
 ##### next dev steps at part on ver5 require improve
 require isready real function, count holders on it and chars and validate objects and forbiden the extra draw of peices when move as it htmlelm_jquery.remove() Iam wrong and forbiden in OOP game will handled with max chartacters classes when move count Not Forget check game Object data also i call this meta optional unlimited data sure or sqlalchemt GameError Table with relation ClientError, SocketError when socket inhirtance and other new discover
+
+
+## the AI vs Computer 2 methods that beat any begniner and random 51% beat the number 1 chess player in world
+
+
+OOP time, and sqlalchemy follow relationship nested , now we had squares with getAllGreen next get the square holders if any and if enemy class ! instanceof this so this 1 red posible kill and oop again will tell me what peaice, is hourse is queen is king and math time each peaee have weight so if king lol in getAllAttacksPossible in second move do it with same methods used by deep blue 1990 i did not used something not supported or react even or fancy lib 
+
+
+
+human never calc all posible w8 when *2 the after move and *3
+mean calc if i move each char with forEach to square and what will be next reds possible
+but here need based on new part which ignore 1 step player can make, for example he possible dead if hourse move 2 things solider and king so he must move one, so i may say try do this way based on peaice weight (which decide aggresive of bot to try get the high weight if player moved the wrong peaice but this will done even after socket to not lose internset in socket as this better feature)
+
