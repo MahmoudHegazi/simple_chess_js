@@ -14,6 +14,11 @@
           href="https://fonts.googleapis.com/css?family=Rancho&effect=fire-animation">
         <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple|3d">
+          <style>
+            .must_hide {
+              display: none !important;
+            }
+          </style>
 </head>
 <body>
 
@@ -46,38 +51,90 @@
 
 
 <div class="container-fluid">
-  <div class="text-center" style="display:none;" id="main_error">
-  </div>
-  <div class="p-3 bg-dark mx-auto rounded d-flex justify-content-center align-items-center text-center" style="overflow:auto;background: chocolate;border: 4px solid chocolate;">
-  <h1 class="font-effect-fire-animation" style="letter-spacing: 0.120rem;font-family: cursive;padding-top:7px;">multipleChess.com</h1>
-  </div>
-  
-  <div class="p-3 bg-dark mx-auto rounded d-flex justify-content-center align-items-start" style="max-width:90%;overflow:auto;max-height:780px;min-height:880px;border: 4px solid chocolate;">
-      <canvas class="rounded" id="demo" style="border:1px solid #d3d3d3;width:100%;height:600px;max-width:650px;box-shadow: 0px 4px 10px 0 rgb(255 255 255 / 0.20%), 0px 6px 6px 0 rgb(241 216 64 / 58%);">
-        Your browser does not support the HTML canvas tag.
-    </canvas>
-    <div id="game_hiddens" class="container p-3" style="display:none;">
-      <div id="screenConts" class="container-fluid w-100 p-0 border-rounded d-flex justify-content-center align-items-start" style="box-shadow: 6px 4px 10px 0 rgb(217 160 74), 4px 6px 20px 0 rgb(227 229 220 / 94%);max-width: 610px;">
-      <img src="https://media0.giphy.com/media/wKdJy5gnLDb7ILmBu9/giphy.gif?cid=790b7611c7vhznfx69mvdleyy5ia10nvwtu43h7twlv6oh2y&ep=v1_gifs_search&rid=giphy.gif&ct=g" style="width:100%;object-fit:contain;max-width: 600px;" class="w-100" id="black_hourse_move" />
-      </div>
+   <div id="final_message" style="position: absolute;top: 0;left: 0;z-index: 100;width:100%;" class="d-flex jusitfy-content-center must_hide">
+        <img id="win_image" src="https://media1.giphy.com/media/jsGz81YPCgw9YSliV0/giphy.gif" style="width:100%;" class="must_hide">
     </div>
-
-  </div>
+        
+    <div class="text-center" style="display:none;" id="main_error">
+    </div>
+    <div class="p-3 bg-dark mx-auto rounded d-flex justify-content-center align-items-center text-center" style="overflow:auto;background: chocolate;border: 4px solid chocolate;">
+        <h1 class="font-effect-fire-animation" style="letter-spacing: 0.120rem;font-family: cursive;padding-top:7px;">multipleChess.com</h1>
+    </div>
+    
+    <div class="p-3 bg-dark mx-auto rounded d-flex justify-content-center align-items-start" style="max-width:90%;overflow:auto;max-height:780px;min-height:880px;border: 4px solid chocolate;">
+        
+        
+        <canvas class="rounded" id="demo" style="border:1px solid #d3d3d3;width:100%;height:600px;max-width:650px;box-shadow: 0px 4px 10px 0 rgb(255 255 255 / 0.20%), 0px 6px 6px 0 rgb(241 216 64 / 58%);">
+            Your browser does not support the HTML canvas tag.
+        </canvas>
+        <div id="game_hiddens" class="container p-3 must_hide">
+            <div id="client_error" class="must_hide">
+                
+            </div>
+            <div id="screenConts" class="must_hide container-fluid w-100 p-0 border-rounded d-flex justify-content-center align-items-start" style="box-shadow: 6px 4px 10px 0 rgb(217 160 74), 4px 6px 20px 0 rgb(227 229 220 / 94%);max-width: 610px;display:none;">
+                <img src="https://media0.giphy.com/media/wKdJy5gnLDb7ILmBu9/giphy.gif?cid=790b7611c7vhznfx69mvdleyy5ia10nvwtu43h7twlv6oh2y&ep=v1_gifs_search&rid=giphy.gif&ct=g" style="width:100%;object-fit:contain;max-width: 600px;" style="width:100%;display:none;"  id="black_hourse_move" />
+            </div>
+        </div>
+    </div>
 </div>
-
 <div>
-
 </div>
-
 
 <script>
-
+// gameMessage
 class GameError {
-    constructor(errorMsg = "Unknown error", error = null, errorCb = () => {}) {
+    constructor(errorMsg = "Unknown error", caller = 'Uknown', error = null, errorCb = () => {}, bsStatus = 'success', bsStrong = 'Sorry Error', game = null) {
         this.message = errorMsg;
+        if (typeof(error) === 'object' && error instanceof Error && error.message) {
+            this.message = error.message;
+        }
         this.isError = true;
+        this.bsStatus = bsStatus;
+        this.bsStrong = bsStrong;
         this.error = error;
         this.errorCb = errorCb;
+        this.messageHTML = false;
+        this.game = game;
+        this.canvasElm = $("canvas#demo");
+        this.messageElm = $("#client_error");
+        this.gameHiddens = $("#game_hiddens");
+        this.isJSError = false;
+        try {
+            this.isJSError = (this.error && this.error instanceof Error && this.error.message);
+        } catch (error) {
+            console.log('catch 1, error from GameError.htmlErrorStart', error);
+            this.isJSError = false;
+        }
+
+
+        try {
+            this.message = (this.message) ? (this.message) : (this.isJSError ? this.error.message : (message ? message : 'Unknown error not more can done to know the error sorry'));
+        } catch (error) {
+            console.log('catch 2, error from GameError.htmlErrorStart', error);
+            this.message = 'Unknown error';
+        }
+
+
+        if (this.messageElm.length && this.canvasElm.length && this.messageElm.length && this.gameHiddens.length) {
+            this.messageHTML = true;
+        }
+
+    }
+
+    htmlErrorStart(errorHTML = '', message = null) {
+
+        try {
+            if (errorHTML && this.messageHTML === true && (this.bsStatus && typeof(this.bsStatus) === 'string') && (this.bsStrong && typeof(this.bsStrong) === 'string')) {
+                this.canvasElm.hide();
+                this.messageElm.removeClass("must_hide");
+                this.messageElm.html(errorHTML);
+                this.gameHiddens.removeClass("must_hide");
+            } else {
+                alert(this.message);
+            }
+        } catch (error) {
+            console.log('unknown error from GameError.htmlErrorStart', error);
+        }
     }
     isValidErrorMsg() {
         return this.message && typeof(this.message) === 'string';
@@ -86,22 +143,45 @@ class GameError {
         return this.error && typeof(this.error) === 'object' && this.error instanceof Error;
     }
 
+    hideError() {
+        try {
+            this.messageElm.addClass("must_hide");
+            this.gameHiddens.addClass("must_hide");
+            this.canvasElm.show();
+        } catch (error) {
+            console.log('unknown error from GameError.hideError', error);
+        }
+    }
+
 }
 
 class ClientError extends GameError {
-    constructor(errorMsg, caller, CatchError = null, errorCb = () => {}) {
+    constructor(errorMsg, caller, CatchError = null, errorCb = () => {}, bsStatus = 'success', bsStrong = 'Sorry Error', game = null) {
         const privateErrorCb = (typeof(errorCb) === 'function') ? errorCb : () => {};
         const privateCaller = (caller && typeof(caller) === 'string') ? caller : 'unknown method';
 
         // call the super class constructor and pass in the name parameter
-        super(errorMsg, CatchError, privateErrorCb);
+        alert(bsStatus);
+        super(errorMsg, caller, CatchError, privateErrorCb, bsStatus, bsStrong, game);
 
         this.displayError();
+
     }
+    getErrorTemplate() {
+        // this simple AI for handle all unknown will coming errors no mater const in nasa c++ error messages return by js I will detect it and display message user player can understand OOP why is rocket code realy not joke
+        const message = this.isJSError && (this.error.message !== this.message) ? this.message : this.message;
+        return `
+              <div class="alert alert-${this.bsStatus} alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>${this.bsStrong}!</strong> ${message}
+              </div>
+                `;
+    }
+
     displayError(errorCb) {
 
         if (this.isValidErrorMsg()) {
-            alert(this.message);
+            this.htmlErrorStart(this.getErrorTemplate(), null);
         }
 
         if (this.isValidError()) {
@@ -130,13 +210,13 @@ class Character {
         const x = (((this.sWidth / 2) / 2) + this.sx);
         this.ctx.drawImage(this.img, x, this.sy, (this.sWidth / 2), (this.sHeight / 1.5) + 2);
     }
-    
+
     displayMovement(moveId, charClass) {
-      if (moveId && $(`#${moveId}`).length && typeof(charClass) === 'object' && charClass instanceof this){
-        alert('hi yes');
-      } else {
-        alert("throw error invalid movment to typescript smuilate and testing client side while using the game.");
-      }
+        if (moveId && $(`#${moveId}`).length && typeof(charClass) === 'object' && charClass instanceof this) {
+            alert('hi yes');
+        } else {
+            alert("throw error invalid movment to typescript smuilate and testing client side while using the game.");
+        }
     }
 }
 
@@ -158,7 +238,7 @@ class Black extends Character {
         this.draw = false;
         this.kills = [];
         this.piece = piece;
-        
+
         // user data
         this.color = 'khaki';
         this.name = 'unknown 1';
@@ -177,8 +257,8 @@ class White extends Character {
         this.lastPlayTime = null;
         this.someThingCalledDraw = false;
         this.kills = [];
-        if ( !(piece instanceof Character) ) {
-          throw 'invalid peace Character constructor'
+        if (!(piece instanceof Character)) {
+            throw 'invalid peace Character constructor'
         }
         this.piece = piece;
         // user data
@@ -250,7 +330,7 @@ class Square {
 
     }
     setHolder(piece) {
-      this.holder = piece;
+        this.holder = piece;
     }
     draw(ctx = null, sx = null, sy = null, width = null, height = null) {
         let currentCtx = ctx;
@@ -318,131 +398,323 @@ class Square {
         return y;
     }
 
-    click() {}
+    //click() {}
 }
 
-
+//GameError
 class Game {
-    constructor(cElm, errorElm, imagesIds=[]) {
+    constructor(cElm, errorElm, imagesIds = []) {
+        try {
+            if (cElm && $(cElm).length && errorElm && $(errorElm).length && Array.isArray(imagesIds)) {
+                this.imagesIds = imagesIds;
 
-        if (cElm && $(cElm).length && errorElm && $(errorElm).length && Array.isArray(imagesIds)) {
-            this.imagesIds = imagesIds;
 
-            
-            
-            this.images = {};
-            this.squares = [];
-            this.cJquery = $(cElm);
-            this.canvas = this.cJquery.get(0);
-            this.context = this.canvas.getContext("2d");
-            this.boardContext = this.canvas.getContext("2d");
-            this.maxImages = 13;
-            this.imagesReady = this.setupImages();
-            this.row = 0;
-            this.col = 0;
-            this.maxRow = 8;
-            this.maxCol = 8;
-            this.lineWidth = '1';
-            this.strokeStyle = 'lightgreen';
-            this.sWidth = 37;
-            this.sHeight = 18;
-            this.lastSquareColor = 'white';
-            
-            // relation 
-            this.Childs = [];
-            
-            const blackSolder = this.images.blackSolder;
-            const blackQueen = this.images['blackQueen'];
-            const blackRook = this.images['blackRook'];
-            const blackHourse = this.images['blackHourse'];
-            const blackElephant = this.images['blackElephant'];
-            const blackKing = this.images['blackKing'];
 
-            const whiteSolder = this.images['whiteSolder'];
-            const whiteQueen = this.images['whiteQueen'];
-            const whiteRook = this.images['whiteRook'];
-            const whiteHourse = this.images['whiteHourse'];
-            const whiteElephant = this.images['whiteElephant'];
-            const whiteKing = this.images['whiteKing'];
-            
-//displayMovement(moveId, charClass)
-            //this is how i draw in game if it tiba it will be the squares and may select tree or rocket or star and may make app auto dynamic create random map with some ai small
-            this.charactersIndexes = [ 
-                [
-                  { img: blackRook, Class: Rook, r: 0, c: 0, color: 'black' },
-                  { img: blackHourse, Class: Hourse, r: 0, c: 1, color: 'black' },
-                  { img: blackElephant, Class: Alfil, r: 0, c: 2, color: 'black' },
-                  { img: blackQueen, Class: Queen, r: 0, c: 3, color: 'black' },
-                  { img: blackKing, Class: King, r: 0, c: 4, color: 'black' },
-                  { img: blackElephant, Class: Alfil, r: 0, c: 5, color: 'black' },
-                  { img: blackRook, Class: Hourse, r: 0, c: 6, color: 'black' },
-                  { img: blackRook, Class: Rook, r: 0, c: 7, color: 'black' }
-                ],
-            
-                [
-                  { img: blackSolder, Class: Solider, r: 1, c: 0, color: 'black' },
-                  { img: blackSolder, Class: Solider, r: 1, c: 1, color: 'black' },
-                  { img: blackSolder, Class: Solider, r: 1, c: 2, color: 'black' },
-                  { img: blackSolder, Class: Solider, r: 1, c: 3, color: 'black' },
-                  { img: blackSolder, Class: Solider, r: 1, c: 4, color: 'black' },
-                  { img: blackSolder, Class: Solider, r: 1, c: 5, color: 'black' },
-                  { img: blackSolder, Class: Solider, r: 1, c: 6, color: 'black' },
-                  { img: blackSolder, Class: Solider, r: 1, c: 7, color: 'black' }
-                ],
-                
-                [], 
-                [], 
-                [],
-                [], 
-                [
-                  { img: whiteSolder, Class: Solider, r: 6, c: 0, color: 'white' },
-                  { img: whiteSolder, Class: Solider, r: 6, c: 1, color: 'white' },
-                  { img: whiteSolder, Class: Solider, r: 6, c: 2, color: 'white' },
-                  { img: whiteSolder, Class: Solider, r: 6, c: 3, color: 'white' },
-                  { img: whiteSolder, Class: Solider, r: 6, c: 4, color: 'white' },
-                  { img: whiteSolder, Class: Solider, r: 6, c: 5, color: 'white' },
-                  { img: whiteSolder, Class: Solider, r: 6, c: 6, color: 'white' },
-                  { img: whiteSolder, Class: Solider, r: 6, c: 7, color: 'white' }
-                ],
-                
-                [
-                  { img: whiteRook, Class: Rook, r: 7, c: 0, color: 'white' },
-                  { img: whiteHourse, Class: Hourse, r: 7, c: 1, color: 'white' },
-                  { img: whiteElephant, Class: Alfil, r: 7, c: 2, color: 'white' },
-                  { img: whiteQueen, Class: Queen, r: 7, c: 3, color: 'white' },
-                  { img: whiteKing, Class: King, r: 7, c: 4, color: 'white' },
-                  { img: whiteElephant, Class: Alfil, r: 7, c: 5, color: 'white' },
-                  { img: whiteHourse, Class: Hourse, r: 7, c: 6, color: 'white' },
-                  { img: whiteRook, Class: Rook, r: 7, c: 7, color: 'white' }
-                  ],
+                this.images = {};
+                this.squares = [];
+                this.cJquery = $(cElm);
+                this.canvas = this.cJquery.get(0);
+                this.context = this.canvas.getContext("2d");
+                this.boardContext = this.canvas.getContext("2d");
+                this.maxImages = 14;
+                this.imagesReady = this.setupImages();
+                this.row = 0;
+                this.col = 0;
+                this.maxRow = 8;
+                this.maxCol = 8;
+                this.lineWidth = '1';
+                this.strokeStyle = 'lightgreen';
+                this.sWidth = 37;
+                this.sHeight = 18;
+                this.lastSquareColor = 'white';
+
+                // relation 
+                this.Childs = [];
+
+                const blackSolder = this.images.blackSolder;
+                const blackQueen = this.images['blackQueen'];
+                const blackRook = this.images['blackRook'];
+                const blackHourse = this.images['blackHourse'];
+                const blackElephant = this.images['blackElephant'];
+                const blackKing = this.images['blackKing'];
+
+                const whiteSolder = this.images['whiteSolder'];
+                const whiteQueen = this.images['whiteQueen'];
+                const whiteRook = this.images['whiteRook'];
+                const whiteHourse = this.images['whiteHourse'];
+                const whiteElephant = this.images['whiteElephant'];
+                const whiteKing = this.images['whiteKing'];
+
+                //displayMovement(moveId, charClass)
+                //this is how i draw in game if it tiba it will be the squares and may select tree or rocket or star and may make app auto dynamic create random map with some ai small
+                this.charactersIndexes = [
+                    [{
+                            img: blackRook,
+                            Class: Rook,
+                            r: 0,
+                            c: 0,
+                            color: 'black'
+                        },
+                        {
+                            img: blackHourse,
+                            Class: Hourse,
+                            r: 0,
+                            c: 1,
+                            color: 'black'
+                        },
+                        {
+                            img: blackElephant,
+                            Class: Alfil,
+                            r: 0,
+                            c: 2,
+                            color: 'black'
+                        },
+                        {
+                            img: blackQueen,
+                            Class: Queen,
+                            r: 0,
+                            c: 3,
+                            color: 'black'
+                        },
+                        {
+                            img: blackKing,
+                            Class: King,
+                            r: 0,
+                            c: 4,
+                            color: 'black'
+                        },
+                        {
+                            img: blackElephant,
+                            Class: Alfil,
+                            r: 0,
+                            c: 5,
+                            color: 'black'
+                        },
+                        {
+                            img: blackRook,
+                            Class: Hourse,
+                            r: 0,
+                            c: 6,
+                            color: 'black'
+                        },
+                        {
+                            img: blackRook,
+                            Class: Rook,
+                            r: 0,
+                            c: 7,
+                            color: 'black'
+                        }
+                    ],
+
+                    [{
+                            img: blackSolder,
+                            Class: Solider,
+                            r: 1,
+                            c: 0,
+                            color: 'black'
+                        },
+                        {
+                            img: blackSolder,
+                            Class: Solider,
+                            r: 1,
+                            c: 1,
+                            color: 'black'
+                        },
+                        {
+                            img: blackSolder,
+                            Class: Solider,
+                            r: 1,
+                            c: 2,
+                            color: 'black'
+                        },
+                        {
+                            img: blackSolder,
+                            Class: Solider,
+                            r: 1,
+                            c: 3,
+                            color: 'black'
+                        },
+                        {
+                            img: blackSolder,
+                            Class: Solider,
+                            r: 1,
+                            c: 4,
+                            color: 'black'
+                        },
+                        {
+                            img: blackSolder,
+                            Class: Solider,
+                            r: 1,
+                            c: 5,
+                            color: 'black'
+                        },
+                        {
+                            img: blackSolder,
+                            Class: Solider,
+                            r: 1,
+                            c: 6,
+                            color: 'black'
+                        },
+                        {
+                            img: blackSolder,
+                            Class: Solider,
+                            r: 1,
+                            c: 7,
+                            color: 'black'
+                        }
+                    ],
+
+                    [],
+                    [],
+                    [],
+                    [],
+                    [{
+                            img: whiteSolder,
+                            Class: Solider,
+                            r: 6,
+                            c: 0,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteSolder,
+                            Class: Solider,
+                            r: 6,
+                            c: 1,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteSolder,
+                            Class: Solider,
+                            r: 6,
+                            c: 2,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteSolder,
+                            Class: Solider,
+                            r: 6,
+                            c: 3,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteSolder,
+                            Class: Solider,
+                            r: 6,
+                            c: 4,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteSolder,
+                            Class: Solider,
+                            r: 6,
+                            c: 5,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteSolder,
+                            Class: Solider,
+                            r: 6,
+                            c: 6,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteSolder,
+                            Class: Solider,
+                            r: 6,
+                            c: 7,
+                            color: 'white'
+                        }
+                    ],
+
+                    [{
+                            img: whiteRook,
+                            Class: Rook,
+                            r: 7,
+                            c: 0,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteHourse,
+                            Class: Hourse,
+                            r: 7,
+                            c: 1,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteElephant,
+                            Class: Alfil,
+                            r: 7,
+                            c: 2,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteQueen,
+                            Class: Queen,
+                            r: 7,
+                            c: 3,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteKing,
+                            Class: King,
+                            r: 7,
+                            c: 4,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteElephant,
+                            Class: Alfil,
+                            r: 7,
+                            c: 5,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteHourse,
+                            Class: Hourse,
+                            r: 7,
+                            c: 6,
+                            color: 'white'
+                        },
+                        {
+                            img: whiteRook,
+                            Class: Rook,
+                            r: 7,
+                            c: 7,
+                            color: 'white'
+                        }
+                    ],
                 ];
-            
-            
-            if (this.imagesReady) {
-                this.squares = this.setupSquares();
-                console.log('squares', this.squares);
-                if (this.squares.length === 8) {
-                    // events and logic of game
-                    this.cJquery.on("click", (e) => {
-                        this.onClickCanvas(e);
-                    });
+
+
+                if (this.imagesReady) {
+                    this.squares = this.setupSquares();
+                    console.log('squares', this.squares);
+                    if (this.squares.length === 8) {
+                        // events and logic of game
+                        this.cJquery.on("click", (e) => {
+                            this.onClickCanvas(e);
+                        });
+
+                    } else {
+                        return new ClientError("Error Unable to setup squares", 'Game.constructor', null, () => {});
+                    }
+
 
                 } else {
-                    return new ClientError("Error Unable to setup squares", 'Game.constructor', null, () => {});
+                    return new ClientError("Error Canvas Missing or invalid images provided", 'Game.constructor', null, () => {});
                 }
 
 
             } else {
-                return new ClientError("Error Canvas Missing or invalid images provided", 'Game.constructor', null, () => {});
+                return new ClientError("Error Canvas not constructed successfully", 'Game.constructor', null, () => {});
             }
-
-
-        } else {
-            return new ClientError("Error Canvas not constructed successfully", 'Game.constructor', null, () => {});
+            //this.c = cElm;
+            console.log(this.cJquery.get(0), this.cWidth, this.cHeight, 'done');
+            //this.ctx = cElm.getContext("2d");
+        } catch (error) {
+            //console.log('error from game.constructor', error);
+            return new ClientError("Unknown Error", 'Game.constructor', error, () => {});
         }
-        //this.c = cElm;
-        console.log(this.cJquery.get(0), this.cWidth, this.cHeight, 'done');
-        //this.ctx = cElm.getContext("2d");
     }
 
 
@@ -485,27 +757,30 @@ class Game {
             this.lastSquareColor = (this.lastSquareColor == 'white') ? 'khaki' : 'white';
             //this.Childs.push();
             for (let c = 0; c < this.maxCol; c++) {
-                
-                
-                
-                
+
+
+
+
                 const sx = this.sWidth * c;
                 const id = (c + 1) + (this.maxCol * (r));
                 const col = new Square(id, r, c, this.lastSquareColor, sx, sy, this.sWidth, this.sHeight, this.context, this);
                 let currentCharacter = null;
-                const chilObject = {square: col, holder: null};
-                
+                const chilObject = {
+                    square: col,
+                    holder: null
+                };
+
                 if (this.charactersIndexes.length > r && this.charactersIndexes[r].length > c && this.charactersIndexes[r][c]) {
                     const char = this.charactersIndexes[r][c];
 
-                  currentCharacter = new char.Class(char.img, sx, sy, this.sWidth, this.sHeight, this.context, this);
-                  
-                  
+                    currentCharacter = new char.Class(char.img, sx, sy, this.sWidth, this.sHeight, this.context, this);
+
+
                     const newPiece = Piece(char.color, char.img, sx, sy, this.sWidth, this.sHeight, this.context, this, currentCharacter);
                     //relaition of square if it hold item dynamic
                     col.holder = newPiece;
                     //piece
-                    
+
                     //console.log(currentCharacter, currentCharacter.sWidth);
                 }
 
@@ -602,7 +877,7 @@ class Game {
             const y = positions[1];
 
             const square = this.getSquareByCords(x, y);
-            
+
             const canIStartMove = this.canIStartMove(square);
             if (canIStartMove) {
                 this.startMove(square);
@@ -614,24 +889,37 @@ class Game {
             console.log("found invalid click Game.onClickCanvas");
         }
     }
-    
-    canIStartMove (square) {
+
+    canIStartMove(square) {
         try {
-          return (square && square.holder && square.holder.piece);
+            return (square && square.holder && square.holder.piece);
         } catch (error) {
-          console.log('error from Game.canIStartMove', error);
-          return false;
+            console.log('error from Game.canIStartMove', error);
+            return false;
         }
     }
-    startMove (square) {
-      if (square) {
-      alert(`Found chess game Row: ${square.r}  Col: ${square.i}, id: ${square.id}`);
-        console.log(square.holder.piece, 'hi holder oop best rprictae best client clean vanila js better than top component oop no server side for frontend and chess core and fast dev as it not nasa.chess yet');
-      } else {
-        throw "invalid startMove triggred from onClickCanvas  for  null square";
-      }
+
+    /* Here there are object on the square and is valid nest movement */
+    startMove(square) {
+        try {
+            if (square) {
+                const playerObject = square.holder;
+
+                alert(`Found chess game Row: ${square.r}  Col: ${square.i}, id: ${square.id}`);
+                //easy example how display errors in oop nasa not require in frontend do more than that
+
+
+                console.log(square.holder, 'hi holder oop best rprictae best client clean vanila js better than top component oop no server side for frontend and chess core and fast dev as it not nasa.chess yet');
+            } else {
+                throw "invalid startMove triggred from onClickCanvas  for  null square";
+            }
+        } catch (error) {
+            console.log('Can not Move Unknown error from Error Game.startMove', error);
+
+            new ClientError('Can not Move.', 'Game.startMove', error, () => {}, 'danger', 'Error:', this);
+        }
     }
-    
+
 
 }
 
@@ -645,18 +933,20 @@ addEventListener("DOMContentLoaded", function() {
                 gameObject = new Game(canvasId, main_error, imagesIds);
             }
         } catch (error) {
-            throw error;
-            gameObject = new ClientError('unable to setup error', 'game.beforeConstruct', () => {}, error);
+            return new ClientError('Unable to Load Game', 'game.beforeConstruct', () => {}, error);
         }
         return gameObject;
-    })("#demo", "#main_error", ["whiteSolder", "blackSolder", "whiteRook", "blackRook", "blackElephant", "whiteElephant", "whiteHourse", "blackHourse", "blackQueen", "whiteQueen", "blackKing", "whiteKing", "black_hourse_move"]);
+    })("#demo", "#main_error", ["whiteSolder", "blackSolder", "whiteRook", "blackRook", "blackElephant", "whiteElephant", "whiteHourse", "blackHourse", "blackQueen", "whiteQueen", "blackKing", "whiteKing", "black_hourse_move", "win_image"]);
 
     console.log(`is Game: ${game instanceof Game}`);
     console.log(`is ClientError: ${game instanceof ClientError}`);
-    console.log(`is GameError or instance of GameError: ${game instanceof GameError}`, game);
+    console.log(`is GameError or instance of GameError: ${game instanceof GameError}`, 'Game or Error like sqlalchemy oneOrNone but diffrent use oop convert way of work at end both same', game);
+
 
 });
 console.log(game);
+
+
 </script>
 
 </body>
