@@ -99,7 +99,7 @@ OOP time, and sqlalchemy follow relationship nested , now we had squares with ge
 
 
 ## top methods AI without AI for bot my job
-1. ```getAllGreenForAllPeaces()```
+1. ```getAllGreenForAllPeaces(forAfter='3plays_loop')```
       -  which all allowed movments of all my peaces
 2. ```getAllAttacksPossible(forAfter='3plays_loop')```
       - OOP time, and sqlalchemy follow relationship nested , now we had squares with getAllGreen next get the square holders if any and if enemy class ! instanceof this so this 1 red posible kill and oop again will tell me what peaice, is hourse is queen is king and math time each peaee have weight so if king lol in getAllAttacksPossible in second move do it with same methods used by deep blue 1990 i did not used something not supported or react even or fancy lib 
