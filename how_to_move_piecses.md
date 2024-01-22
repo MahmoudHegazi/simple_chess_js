@@ -2,6 +2,8 @@
 
 ###### this main for me while devloping and for other js dev to know how handle chess game movment easy with 2D array all needed from u use same, array and use rule that uses row index and i index
 
+note game (uses auto detect all posible position valid before play and remove and draw only the character class
+
 #### MAP (JS pandas part like 2DArray for move) (this make all pues movement lows using direct 2d array and just i and r to get target sqaure and assign it holder if accepted
 ```javascriptarr
 this.charactersIndexes = [
