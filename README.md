@@ -5,10 +5,11 @@ simple classes, and objects
 
 responsive chess web game canvas bootstrap
 
-#### last step in game play will be like this with diff gif or use this if decide display message based on socket player who win and keep You Win
-![image](https://github.com/MahmoudHegazi/simple_chess_js/assets/55125302/d9f9dbec-cf56-45e3-a09c-c0bdb1d106bc)
 
 ![image](https://github.com/MahmoudHegazi/simple_chess_js/assets/55125302/1754488c-e7ae-41ee-8f7c-321b4ada214b)
+
+#### last step in game play will be like this with diff gif or use this if decide display message based on socket player who win and keep You Win
+![image](https://github.com/MahmoudHegazi/simple_chess_js/assets/55125302/d9f9dbec-cf56-45e3-a09c-c0bdb1d106bc)
 
 
 #WHat is that:
