@@ -74,9 +74,9 @@ frowrad he need minus row, as, (this for soliders only)
 2. The king (allow used methods[ verticalLineOne(this), horizontalOne(this), diagonallyOne(this)  ])
     - Note:first point u can get prev and after i of current pos, ex it in 1, so 0 and 2,
     - look below <br />
-    `<1>`- First (i+1,same r) (i-1,same r) if any horizontal <>  (I call it verticalLine one) <br />
-    `|2|`- second (r+1,same i) (r-1,same i) if any vertical |   (I call it horizontal one) <br />
-    `\/`3------>? ? (i+1, r-1)>/  i-1, r-1 <\  ,,,,  (i+1, r+1)>\ (i-1, r+1) </  (diagonally one) **التحرك السموكسي** <br />
+    `<1>`- First **(i+1,same r)**  -- **(i-1,same r)** if any horizontal <>  (I call it verticalLine one) <br />
+    `|2|`- second **(r+1,same i)** -- **(r-1,same i)** if any vertical |   (I call it horizontal one) <br />
+    `\/`3------>? ? **(i+1, r-1)** >/ --   **(i-1, r-1)** <\  ,,,,  **(i+1, r+1)** >\ -- **(i-1, r+1)** </  -> (diagonally one) **التحرك السموكسي** <br />
     `/\`
 
     - **Software diagrams and core js works for advanced info and more detials how it works**
