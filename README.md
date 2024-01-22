@@ -28,7 +28,7 @@ select match type here like League of legends and byoned
 * (1vall with max number of enemy ex) 1 vs all but max players not more than 32 players or vice versa to find ur need like 32 players vs lowest 1 and sure both have option let system manage as avail now it noob web site yet so few players.
 * (all options can have friends in game saved in db play togther and one leader of them send create room request to flask and others join fast auto the room created and leader select settings of game -v- settings
  
-6- leader/player ready he and if multiple friends feature (nested socket are ready) will click on button start game queue and all db will save game config selected in db and users meta data for perperae node.js work with same mysql db microservice many, then flask will take the AJAX game start request and sent web GET request to node.js play_queue endpoint which setup the game room and save in database info
+6- leader/player ready he and if multiple friends feature (nested socket are ready) will click on button start game queue and all db will save game config selected in db and users meta data for perperae node.js work with same mysql db **microservice app*** many, then flask will take the AJAX game start request and sent web GET request to node.js play_queue endpoint which setup the game room and save in database info
 about how many players in room and their config and keep check with socket and while until in database other players meet the ranges of config or managa auto if no settings selected.
 
 7- note as this ES6 client js OOP and almost not less than ts it not make error and have if statment cover all cases, and as i said flask is api brain managaer for website the client side is managed by node.js and rendered
