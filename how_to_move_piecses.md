@@ -85,3 +85,7 @@ frowrad he need minus row, as, (this for soliders only)
 
 
 -----------------------------------
+
+
+##### next dev steps at part on ver5 require improve
+require isready real function, count holders on it and chars and validate objects and forbiden the extra draw of peices when move as it htmlelm_jquery.remove() Iam wrong and forbiden in OOP game will handled with max chartacters classes when move count Not Forget check game Object data also i call this meta optional unlimited data sure or sqlalchemt GameError Table with relation ClientError, SocketError when socket inhirtance and other new discover
