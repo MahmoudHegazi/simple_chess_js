@@ -66,7 +66,7 @@
             <div id="client_error" class="must_hide">
             </div>
             <div id="screenConts" class="must_hide container-fluid w-100 p-0 border-rounded d-flex justify-content-center align-items-start" style="box-shadow: 6px 4px 10px 0 rgb(217 160 74), 4px 6px 20px 0 rgb(227 229 220 / 94%);max-width: 610px;display:none;">
-                <img id="hourse_move_video" src="https://media0.giphy.com/media/wKdJy5gnLDb7ILmBu9/giphy.gif?cid=790b7611c7vhznfx69mvdleyy5ia10nvwtu43h7twlv6oh2y&ep=v1_gifs_search&rid=giphy.gif&ct=g" style="width:100%;object-fit:contain;max-width: 600px;" style="width:100%;display:none;"  id="black_hourse_move" />
+                <img id="hourse_move_video" src="https://media0.giphy.com/media/wKdJy5gnLDb7ILmBu9/giphy.gif?cid=790b7611c7vhznfx69mvdleyy5ia10nvwtu43h7twlv6oh2y&ep=v1_gifs_search&rid=giphy.gif&ct=g" style="width:100%;object-fit:contain;max-width: 600px;" style="width:100%;display:none;" />
             </div>
         </div><!-- https://i.giphy.com/wKdJy5gnLDb7ILmBu9.webp -->
     </div>
@@ -77,7 +77,7 @@
 
 <script>
 // gameMessage
-let environment = 'publish';
+let environment = 'development';
 class GameError {
     constructor(isSystem = false, errorMsg = "Unknown error", caller = 'Uknown', error = null, game = null, errorCb = () => {})
         {
@@ -470,7 +470,7 @@ class Game {
                 this.canvas = this.cJquery.get(0);
                 this.context = this.canvas.getContext("2d");
                 this.boardContext = this.canvas.getContext("2d");
-                this.maxImages = 15;
+                this.maxImages = 14;
                 this.imagesReady = this.setupImages();
                 this.row = 0;
                 this.col = 0;
@@ -795,10 +795,8 @@ class Game {
             if (square) {
                 const playerObject = square.holder;
 
-                alert(`Found chess game Row: ${square.r}  Col: ${square.i}, id: ${square.id}`);
-                //easy example how display errors in oop nasa not require in frontend do more than that
-                /* new ClientError('error is opp html what can done more than that core js and client my code async, Note all js Errors are returned as newClient Error class instance but not all newClient Error is core Error, learn oop responsive canvas');*/alert("Next Move Ready \n\n\n\n\time for peices  move oop converted HTML to oop who imagine throw error or create new ClientError('message')enogh also after it do alot oop things to stop game and also manage html no do thing just create ClientError class even core js Error class if created alone not enogh to throw Error custom not related to logical throw noob need throw to create it can not dynamic it sorry python king  can develop js itself now fixed that");
-
+                alert(`Valid Move chess game Row: ${square.r}  Col: ${square.i}, id: ${square.id}`);
+                
                 console.log(square);
             } else {
                 throw "invalid startMove triggred from onClickCanvas  for  null square";
@@ -840,9 +838,8 @@ addEventListener("DOMContentLoaded", function() {
         "whiteQueen",
         "blackKing",
         "whiteKing",
-        "black_hourse_move",
-        "win_image",
-        "hourse_move_video"
+        "hourse_move_video",
+        "win_image"
     ]);
 
     console.log(`is Game: ${game instanceof Game}`);
