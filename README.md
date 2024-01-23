@@ -39,6 +39,7 @@ after game end node.js save in db to think with flask and can send flask request
 as seen node.js manage game js client side and socket , flask API is main website and brain and starter of the node.js no direct access for node.js without also ouath of flask best is connect both oauth2 flask and node.js
  advanced devops exp needed.or full game node.js, better client js and backend js togther
 
+8- when play must validate movments with backend to protect from hacked the game and make invalid movments
 ---------------------
 
 ## Screenshots and How OOP manage everything in app even html and errors of js core, so handle for each part is one place speacily for report errors to server and class sockets later steps benfit
