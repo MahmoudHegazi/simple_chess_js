@@ -800,9 +800,7 @@ class Game {
                       
                       if (this.squares.length === 8) {
                           // events and logic of game
-                          this.cJquery.on("click", (e) => {
-                              this.onClickCanvas(e);
-                          });
+                          this.BeforeMoveOn();
                           return true;
 
                       } else {
@@ -827,7 +825,27 @@ class Game {
             throw error;
         }
     }
-
+    
+    BeforeMoveOn() {
+       this.cJquery.on("click.beforeMove", (e) => {
+           this.onClickCanvas(e);
+       });
+    }
+    BeforeMoveOff() {
+    alert("stoped selection listener");
+       this.cJquery.off("click.beforeMove");
+    }
+    
+    moveOn() {
+       this.cJquery.on("click.move", (e) => {
+           this.onMove(e);
+       });
+    }
+    moveOff() {
+    alert("stoped move listener");
+       this.cJquery.off("click.move");
+    }
+    
     draw(data=[]) {
         this.squares = this.setupSquares(data);
     }
@@ -1101,6 +1119,9 @@ if(r>0){continue}
                }
                
                console.log("moveOptions", moveOptions);
+               // here temp stop 
+               this.BeforeMoveOff();
+               this.moveOn();
 
             }
             
@@ -1108,6 +1129,12 @@ if(r>0){continue}
             console.log('Can not Move Unknown error from Error Game.startMove', error);
 
             return new ClientError(false, "Can not Move.", 'Game.startMove', error, this);
+        }
+    }
+    
+    onMove(e) {
+        if (e && e.clientX && e.clientY) {
+           alert("Move phase");
         }
     }
     
@@ -1137,6 +1164,7 @@ if(r>0){continue}
          }
        }
     }
+    
 }
 
 
