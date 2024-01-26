@@ -131,7 +131,7 @@ class GameError {
                 this.messageElm.html(errorHTML);
                 this.gameHiddens.removeClass("must_hide");
             } else {
-                //alert(this.message);
+                alert(this.message);
             }
         } catch (error) {
             console.log('unknown error from GameError.htmlErrorStart', error);
