@@ -704,14 +704,24 @@ class ClientSoundMessage extends ClientMessage {
                   this.color = 'green';
                 }
              }
+             let newIdDynamicSocetId = `message_${($(".msg_elm").length+1)}`;
+             
              this.messageElm.html(`
-              <div class="alert alert-dismissible" style="color:${this.color};background:${this.bg}">
+              <div class="msg_elm alert alert-dismissible" style="color:${this.color};background:${this.bg}" id="${newIdDynamicSocetId}">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <div class="text-left">
                     <strong>System:</strong> ${message}
                   </div>
               </div>
              `);
+             // hide message after 2 seconds if not hided by user bs close btn
+             setTimeout( ()=>{
+                 const msgElmSelector = `#${newIdDynamicSocetId}`;
+                 if ($(msgElmSelector).length){
+                     $(msgElmSelector).remove();
+                 }
+                 return true;
+             }, 5000 );
           } else {
               this.messageElm.html('');
           }
@@ -1393,8 +1403,7 @@ class Game {
                 try {
                         /* db_id is recived from setup characterindex , and charcterindex will recived and async with server for validate */
                         return (typeof(square) === 'object' && square instanceof Square && this.validstart &&
-                                square.db_id && square.holder instanceof Character &&
-                                square.holder instanceof this.getTurnClass()) ? true : false;
+                                square.db_id && square.holder instanceof Character) ? true : false;
                 } catch (error) {
                         return new ClientError(true, error.message, 'Game.canIStartMove', error, this);
                 }
@@ -1466,7 +1475,7 @@ class Game {
                                 return false;
                         }
                         if (character instanceof this.getOtherClass()) {
-                                return alert("Its not your turn this ClientMessage Class needed");
+                                return this.rejectMove(square, "Its not your turn");
                                 //return new ClientError(false, "Its not your turn this ClientMessage Class", 'Game.startMove', null, this);
                         }
                         if (character && this.turn != this.getOtherTurn()) {
