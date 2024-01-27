@@ -50,6 +50,8 @@
 
 <audio src="https://github.com/MahmoudHegazi/simple_chess_js/raw/main/sound1_wrong.mp3" style="display:none !important;" id="wrong_sound" ></audio>
 
+<audio src="https://github.com/MahmoudHegazi/simple_chess_js/raw/main/move_sound.mp3" style="display:none !important;" id="move_sound" ></audio>
+
 
 <div class="container-fluid">
     <div id="final_message" style="position: absolute;top: 0;left: 0;z-index: 100;width:100%;" class="d-flex jusitfy-content-center must_hide">
@@ -784,7 +786,7 @@ class Game {
 
                                 this.setup = false;
                                 this.maxImages = 14;
-                                this.maxSounds = 1;
+                                this.maxSounds = 2;
                                 this.imagesReady = this.setupImages();
                                 this.soundsReady = this.setupSounds();
                                 this.row = 0;
@@ -889,7 +891,7 @@ class Game {
                     ) {
                    
                    
-                   alert(currentSquare.holder.constructor.name + '->' + (square.holder ? square.holder.constructor.name : square.holder));
+                   console.log(currentSquare.holder.constructor.name + '->' + (square.holder ? square.holder.constructor.name : square.holder));
                    
                   
                    // empty old square only canvas using the oop
@@ -902,7 +904,7 @@ class Game {
                    
                    // draw the new changes auto display the square.holder image and remove old like appendChild 1 elm only
                    square.draw(true);
-                   alert(currentSquare.holder + '->' + square.holder.constructor.name);
+                   console.log(currentSquare.holder + '->' + square.holder.constructor.name);
                 } else {
                    // this method should not called to move and hide the king check win must prevent that so incase happend this game error;
                    return new ClientError(true, 'King Can not Die invalid Call.', 'Game.switchPoistion', null, this);
@@ -1586,7 +1588,7 @@ class Game {
                                 }
                                 /* ############ ---- APPLY Switch on EndTurn CB atfer everything ---- ################# */
                                 //this.switchTurn();
-                                alert("Move phase:->" + this.turn);
+                                //alert("Move phase:->" + this.turn);
                                 /* phase 2 is last action can done before switch turn (last event cb) */
                                 return true;
                         } else {
@@ -1630,6 +1632,8 @@ class Game {
                        if (validMove) {
                          // close move and preve before move closed, so all events closed
                          this.moveOff();
+                         
+                         new ClientSoundMessage(this.turnClass, this.sounds['move_sound'], null, null);
                          
                          // do all changes
                          
@@ -1853,7 +1857,7 @@ addEventListener("DOMContentLoaded", function() {
                         "whiteKing",
                         "hourse_move_video",
                         "win_image"
-                ], ['wrong_sound']);
+                ], ['wrong_sound', 'move_sound']);
         console.log(`is Game: ${game instanceof Game}`);
         console.log(`is ClientError: ${game instanceof ClientError}`);
         console.log(`is GameError or instance of GameError: ${game instanceof GameError}`, 'Game or Error like sqlalchemy oneOrNone but diffrent use oop convert way of work at end both same', game);
