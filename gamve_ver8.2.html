@@ -1111,17 +1111,15 @@ class Game {
                         if (square instanceof Square && !(square.holder && !(square.holder instanceof Character))) {
                                 const character = square.holder;
                                 let isAttack = character && character instanceof Character ? true : false;
-                                // mean is this is attack mean holder stand, and this holder not from target or other class which is enemy of random current turn? 
-                                console.log("what son of noob");
+
                                 if (isAttack && !(character instanceof this.getOtherClass())) {
-                                        return alert("Oh: You can not attack your ally its not bbug bomb feature ClientMessage Class needed");
-                                        //return new ClientError(false, "Its not your turn this ClientMessage Class", 'Game.startMove', null, this);
+                                        return this.rejectMove(square, "Oh: You can not attack your ally its not bbug bomb feature ClientMessage Class needed");
                                 }
-                                // black != white true  , black != black false 
+
                                 if (this.turn === this.getOtherTurn()) {
-                                        return alert("Oh this triky socket errro you can not move on other player turn");
+                                        return this.rejectMove(square, "Oh this triky socket errro you can not move on other player turn");
                                 }
-                                // temp here added shouldadded last func must added before switch turn
+
                                 if (isAttack) {
                                         this.attack(square);
                                         console.log("this can be attack or invalid action can preperae action methods and things and performance? is invalid:" + (isAttack && !(character instanceof this.getOtherClass())));
@@ -1153,8 +1151,15 @@ class Game {
                 try {
                         alert(`handle move:${square.db_id}`);
                 } catch (error) {
-                        return new ClientError(false, "Unable to Move the piece.", 'Game.Move', error, this);
+                        return new ClientError(true, "Unable to Move the piece.", 'Game.Move', error, this);
                 }
+        }
+        rejectMove(square, message) {
+          try {
+            return alert('Client Message' + message);
+          } catch (error) {
+            return new ClientError(true, error.message, 'Game.rejectMove', error, this);
+          }
         }
         toggleGuide(moveOptions = [], status = 'show', noobModeOn = false) {
                 if (status === 'show') {
