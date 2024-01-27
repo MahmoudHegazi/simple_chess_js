@@ -894,7 +894,7 @@ class Game {
                    
                    alert(currentSquare.holder.constructor.name + '->' + (square.holder ? square.holder.constructor.name : square.holder));
                    
-                   
+                  
                    // empty old square only canvas using the oop
                    currentSquare.empty();
                    // set the square selected to move to the new square holder
@@ -905,7 +905,6 @@ class Game {
                    
                    // draw the new changes auto display the square.holder image and remove old like appendChild 1 elm only
                    square.draw(true);
-
                    alert(currentSquare.holder + '->' + square.holder.constructor.name);
                 } else {
                    // this method should not called to move and hide the king check win must prevent that so incase happend this game error;
@@ -1634,8 +1633,14 @@ class Game {
                        if (validMove) {
 
                          this.moveOff();
-                         this.switchPoistion(square, currentSquare);
+
                          this.switchTurn();
+                         
+                         this.toggleGuide(moveOptions, 'hide', this.iNoob);
+                         
+                         // take care squares list need async also with changes
+                         this.switchPoistion(square, currentSquare);
+
                          this.BeforeMoveOn();
                          
                        } else {
