@@ -660,18 +660,24 @@ class ClientMessage {
 
 class ClientSoundMessage extends ClientMessage {
    constructor(turnClass, soundElm, message='', status='danger', color='white', bg='black') {
-
+     try {
         if (turnClass.prototype instanceof Character && soundElm && soundElm.nodeName && soundElm.nodeName.toLowerCase() === 'audio') {
 
           super(turnClass, color, bg);
           this.audioElm = soundElm;
           this.playAudio();
-          this.displayMessage(message, status);
+          if (message) {
+            this.displayMessage(message, status);
+          }
+          
         } else {
           return new ClientError(true, 'invalid audio element provided', 'constructor', null, null);
         }
-
+     } catch (error) {
+        return new ClientError(true, error.message, 'ClientSoundMessage.constructor', error, null);
+     }
    }
+   
    playAudio() {
      try {
          if (this.audioElm && this.audioElm.nodeName && this.audioElm.nodeName.toLowerCase() === 'audio'){
@@ -978,16 +984,6 @@ class Game {
                                  null,
                                  null,
                                  null,
-                             ],
-                             [
-                                 null,
-                                 null,
-                                 null,
-                                 null,
-                                 null,
-                                 null,
-                                 null,
-                                 null,              
                              ],
                              [
                                  null,
